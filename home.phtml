@@ -1,0 +1,31 @@
+<?php
+require("head.phtml");
+?>
+
+<main>
+    <div class="my-repos">
+        <?php if ($logged_in) : ?>
+            <div>
+                <h3>Your Repositories</h3>
+
+                <a class="new" href="/repo/create">
+                    New
+                </a>
+            </div>
+
+            <ul>
+                <?php foreach ($repos as $repo) : ?>
+                    <li class="repo">
+                        <a href="/repo/?name=<?= $repo["name"] ?>">
+                            <?= $repo["name"] ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+</main>
+
+</body>
+
+</html>

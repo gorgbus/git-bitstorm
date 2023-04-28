@@ -1,0 +1,21 @@
+<?php
+require("../head.phtml");
+?>
+
+<h2><?= $user["username"] ?></h2>
+
+<h3>Repositories</h3>
+
+<ul class="repos">
+    <?php foreach ($repos as $repo) : ?>
+        <li class="repo">
+            <a href="/repo/?name=<?= $repo["name"] ?>">
+                <?= $repo["name"] ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+main {
+    background-color: var(--bg-darker);
+}
+
+.my-repos {
+    width: 250px;
+    padding: 20px 10px;
+    background-color: var(--bg);
+    height: calc(100vh - 100px);
+}
+
+.my-repos div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.my-repos h3 {
+    color: white;
+}
+
+.my-repos ul {
+    list-style: none;
+}
+
+.new {
+    color: white;
+    text-decoration: none;
+    transition: all 100ms ease-in-out;
+    background-color: var(--btn-bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.new:hover {
+    background-color: var(--btn-bg-hover);
+}
+
+.repo a {
+    color: white;
+    text-decoration: none;
+}
+
+.repo a:hover {
+    text-decoration: underline;
+}

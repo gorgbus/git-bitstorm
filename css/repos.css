@@ -1,0 +1,19 @@
+h3 {
+    color: white;
+}
+
+.repo {
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+
+.repo a {
+    color: var(--bg-hover);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14pt;
+}
+
+.repo a:hover {
+    text-decoration: underline;
+}

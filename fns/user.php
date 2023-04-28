@@ -1,0 +1,94 @@
+<?php
+function login($db, $username, $password) {
+    $password = sha1($password);
+
+    $sql = "
+        select id
+        from user
+        where username = '$username'
+        and password = '$password'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) echo mysqli_error($db);
+
+    $user = mysqli_fetch_assoc($res);
+
+    if ($user) {
+        $_SESSION["user"] = $user["id"];
+
+        return 1;
+    }
+
+    return 0;
+}
+
+function register($db, $username, $password) {
+    $password = sha1($password);
+
+    $sql = "
+        insert into user (username, password)
+        values ('$username', '$password')
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if ($res) return 1;
+    else echo mysqli_error($db);
+
+    return 0;
+}
+
+function user_exists($db, $username) {
+    $sql = "
+        select id
+        from user
+        where username = '$username'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) echo mysqli_error($db);
+    
+    $user = mysqli_fetch_assoc($res);
+
+    if ($user) return 1;
+    
+    return 0;
+}
+
+function get_user($db, $user_id) {
+    $sql = "
+        select username
+        from user
+        where id = $user_id
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) echo mysqli_error($db);
+
+    $user = mysqli_fetch_assoc($res);
+
+    return $user;
+}
+
+function search_users($db, $username) {
+    $sql = "
+        select id, username
+        from user
+        where username like '%$username%'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+        return [];
+    }
+
+    $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+    return $users;
+}

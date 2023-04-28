@@ -1,0 +1,33 @@
+<?php
+require("../head.phtml");
+?>
+
+<?php if (isset($repos)) : ?>
+    <h3><?= sizeof($repos) ?> repository results</h3>
+<?php endif; ?>
+
+<?php if (isset($users)) : ?>
+    <h3><?= sizeof($users) ?> user results</h3>
+<?php endif; ?>
+
+<ul class="repos">
+    <?php if (isset($repos)) foreach ($repos as $repo) : ?>
+        <li class="repo">
+            <a href="/repo?name=<?= $repo["name"] ?>"><?= $repo["username"] ?>/<?= $repo["name"] ?></a>
+
+            <!-- <p><?= $repo["desc"] ?></p> -->
+        </li>
+    <?php endforeach; ?>
+
+    <?php if (isset($users)) foreach ($users as $user) : ?>
+        <li>
+            <a href="/user/?id=<?= $user["id"] ?>">
+                <?= $user["username"] ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+</body>
+
+</html>
