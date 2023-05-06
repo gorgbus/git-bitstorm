@@ -1,5 +1,7 @@
 <?php
-function repo_exists($db, $name) {
+
+function repo_exists($db, $name)
+{
     $sql = "
         select *
         from repository
@@ -13,13 +15,18 @@ function repo_exists($db, $name) {
         return 0;
     }
 
-    if (mysqli_fetch_assoc($res)) return 1;
+    if (mysqli_fetch_assoc($res)) {
+        return 1;
+    }
 
     return 0;
 }
 
-function create_repo($db, $name, $private, $owner) {
-    if (repo_exists($db, $name)) return -1;
+function create_repo($db, $name, $private, $owner)
+{
+    if (repo_exists($db, $name)) {
+        return -1;
+    }
 
     $sql = "
         insert into repository
@@ -37,7 +44,8 @@ function create_repo($db, $name, $private, $owner) {
     return 1;
 }
 
-function get_repos($db, $user_id, $visitor_id) {
+function get_repos($db, $user_id, $visitor_id)
+{
     $sql = "
         select *
         from repository
@@ -56,7 +64,8 @@ function get_repos($db, $user_id, $visitor_id) {
     return $repos;
 }
 
-function get_repo($db, $name) {
+function get_repo($db, $name)
+{
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
@@ -75,7 +84,8 @@ function get_repo($db, $name) {
     return $repo;
 }
 
-function search_repos($db, $name, $visitor_id) {
+function search_repos($db, $name, $visitor_id)
+{
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
@@ -94,7 +104,8 @@ function search_repos($db, $name, $visitor_id) {
     return $repos;
 }
 
-function search_my_repos($db, $name, $user_id) {
+function search_my_repos($db, $name, $user_id)
+{
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id

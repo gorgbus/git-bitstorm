@@ -2,6 +2,7 @@
 require("../session.php");
 require("../db.php");
 
+require("../fns/git.php");
 require("../fns/repo.php");
 require("../fns/files.php");
 
@@ -13,6 +14,12 @@ if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["o
 
 $title = $repo["username"] . "/" . $repo["name"];
 
-$files = get_files($title);
+$commit = get_latest_commit($title);
+$path = "";
+$commit_count = get_commit_count($title, $commit);
+
+$commit_query = "";
+
+$files = get_tree($title, $commit, $path);
 
 require("repo.phtml");

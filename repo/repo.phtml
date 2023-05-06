@@ -1,32 +1,4 @@
 <?php
 require("../head.phtml");
-?>
-
-<main>
-    <h2>
-        <a href="/repo/?name=<?= $repo["name"] ?>">
-            <?= $repo["username"] ?>/<?= $repo["name"] ?>
-        </a>
-    </h2>
-    <p>Here is a list of all the files in the repository.</p>
-
-    <?php if ($logged_in && $repo["owner"] == $_SESSION["user"]) : ?>
-        <a href="/repo/upload/?name=<?= $repo["name"] ?>">
-            Upload files
-        </a>
-    <?php endif; ?>
-
-    <ul>
-        <?php foreach ($files as $file) : ?>
-            <li>
-                <a href="repo.php?file=<?php echo $file; ?>">
-                    <?php echo $file; ?>
-                </a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</main>
-
-</body>
-
-</html>
+require("repo_head.phtml");
+require("repo_main.phtml");

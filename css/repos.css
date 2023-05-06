@@ -17,3 +17,11 @@ h3 {
 .repo a:hover {
     text-decoration: underline;
 }
+
+
+.code li {
+    white-space: pre;
+    list-style: none;
+    height: 19px;
+    color: white;
+}

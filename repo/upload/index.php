@@ -4,6 +4,7 @@ require("../../db.php");
 
 if (!$logged_in) return require("../../404.phtml");
 
+require("../../fns/git.php");
 require("../../fns/files.php");
 require("../../fns/repo.php");
 
@@ -16,12 +17,10 @@ $max_file_size = 1024 * 1024 * 10;
 
 $dir = $repo["username"] . "/" . $repo["name"];
 
-require("upload.phtml");
-
-if (isset($_FILES["files"])) {
-    $files = $_FILES["files"];
-
-    save_files($files, $dir);
+if (isset($_FILES["files"]) && isset($_POST["message"]) && !empty($_POST["message"])) {
+    save_files($dir, $_FILES["files"], $_POST["message"]);
 
     header("Location: /repo/?name=" . $repo["name"]);
 }
+
+require("upload.phtml");

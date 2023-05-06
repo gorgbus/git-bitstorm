@@ -1,24 +1,25 @@
 <?php
 require("../../head.phtml");
+require("../repo_head.phtml");
 ?>
 
-<h2>
-    <a href="/repo/?name=<?= $repo["name"] ?>">
-        <?= $dir ?>
-    </a>
-</h2>
-<h3>Upload files</h3>
+	<h3>Upload files</h3>
+	
+	<form method="post" enctype="multipart/form-data">
+	    <div>
+	        <label>choose files</label>
+	        <input type="hidden" name="MAX_FILE_SIZE" value="<?= $max_file_size ?>">
+	        <input type="file" name="files[]" id="files" multiple required>
+	    </div>
 
-<form method="post" enctype="multipart/form-data">
-    <div>
-        <label for="name">choose files</label>
-        <input type="hidden" name="MAX_FILE_SIZE" value="<?= $max_file_size ?>">
-        <input type="file" name="files[]" id="files" multiple required>
-    </div>
-
-    <button type="submit">Commit changes</button>
-</form>
+        <div>
+            <label for="message">message</label>
+            <input type="text" name="message" id="message" required>
+        </div>
+	
+	    <button type="submit">Commit changes</button>
+	</form>
+</main>
 
 </body>
-
 </html>
