@@ -86,7 +86,7 @@ function commit($dir, $name) {
 
     exec("cd $dir && git add .");
 
-    exec("cd $dir && git commit -m $name");
+    exec("cd $dir && git commit -m " . '"' . $name . '"');
 }
 
 function init_repo($dir) {
@@ -122,14 +122,16 @@ function re_array_tree($dir, $tree, $commit) {
 
         if ($first_commit == $commit) $range = $commit;
 
-        exec("cd $dir && git log -n 1 --format=" . '"%s %ar"' . " --find-object=$hash $range --boundary", $commit_info);
+        exec("cd $dir && git log -n 1 --format=" . '"%s%n%ar%n%H"' . " --find-object=$hash $range --boundary", $commit_info);
 
         $msg = "";
         $date = "";
+        $file_commit = "";
 
         if (count($commit_info) > 0) {
-            $msg = strtok($commit_info[0], " ");
-            $date = substr($commit_info[0], strlen($msg));
+            $msg = $commit_info[0];
+            $date = $commit_info[1];
+            $file_commit = $commit_info[2];
         } 
 
         $n_tree[$i] = [
@@ -137,6 +139,7 @@ function re_array_tree($dir, $tree, $commit) {
             "name" => $name,
             "msg" => $msg,
             "date" => $date,
+            "commit" => $file_commit,
         ];
 
         $i++;
@@ -149,7 +152,74 @@ function get_file($dir, $commit, $path) {
     $dir = __DIR__ . "/../repositories/" . $dir;
     $file = [];
 
+    if (!file_exists($dir)) return [];
+
     exec("cd $dir && git cat-file -p $commit:$path", $file);
 
     return $file;
+}
+
+function get_diff($dir, $old_commit, $new_commit) {
+    $dir = __DIR__ . "/../repositories/" . $dir;
+    $diff = [];
+
+    if (!file_exists($dir)) return [];
+
+    $range = "$old_commit $new_commit";
+    $empty_tree = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
+
+    if ($old_commit == $new_commit) $range = "$empty_tree $old_commit";
+    
+    exec("cd $dir && git diff $range", $diff);
+    
+    return implode("\n", $diff);
+}
+
+function get_prev_commit($dir, $commit) {
+    $dir = __DIR__ . "/../repositories/" . $dir;
+    $prev_commit = [];
+
+    if ($commit == get_first_commit($dir)) return $commit;
+
+    if (!file_exists($dir)) return [];
+
+    exec("cd $dir && git log -n 1 --format=" . '"%H"' . " $commit~1", $prev_commit);
+
+    return $prev_commit[0];
+}
+
+function create_zip($username, $repo_name, $commit) {
+    $dir = __DIR__ . "/../repositories/" . $username . "/" . $repo_name;
+
+    if (!file_exists($dir)) return 0; 
+
+    $out_dir = __DIR__ . "/../tmp/" . $username;
+    $output = $out_dir . "/" . $repo_name;
+
+    if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
+
+    $output = $output . ".zip";
+
+    if (!file_exists($out_dir)) mkdir($out_dir, 0777, true);
+
+    exec("cd $dir && git archive --format=zip --output=$output $commit");
+
+    return $output;
+}
+
+function create_file($username, $repo_name, $file, $commit) {
+    $dir = __DIR__ . "/../repositories/" . $username . "/" . $repo_name;
+
+    if (!file_exists($dir)) return 0; 
+
+    $out_dir = __DIR__ . "/../tmp/" . $username;
+    $output = $out_dir . "/" . pathinfo($file, PATHINFO_FILENAME);
+
+    if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
+
+    $output = $output . "." . pathinfo($file, PATHINFO_EXTENSION);
+
+    exec("cd $dir && git cat-file -p $commit:$file > $output");
+
+    return $output;
 }

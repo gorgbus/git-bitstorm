@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
 
 :root {
-    --nav: #1e293b;
-    --bg: #111827;
-    --bg-darker: #020617;
-    --bg-hover: #3b82f6;
+    --nav: #161b22;
+    --bg: #0d1117;
+    --bg-darker: #010409;
+    --bg-hover: #2f81f7;
     --text-hover: #c2c5ca;
-    --btn-bg-hover: #22c55e;
-    --btn-bg: #16a34a;
+    --btn-bg-hover: #2ea043;
+    --btn-bg: #238636;
 }
 
 * {

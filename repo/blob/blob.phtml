@@ -2,8 +2,22 @@
 require("../../head.phtml");
 require("../repo_head.phtml");
 ?>
+    
+    <p>    
+        <a href="/repo/download/?name=<?= $repo["name"] ?>&commit=<?= $commit ?>&path=<?= $path ?>">
+            download 
+        </a>
+    </p>
 
-    <pre><code><?php foreach ($file as $line) echo htmlspecialchars($line) . "\n"; ?></code></pre>
+    <?php
+        if (is_binary($file)) {
+            echo "binary file";
+        } else {
+            echo "<pre><code>";
+            foreach ($file as $line) echo htmlspecialchars($line) . "\n";
+            echo "</code></pre>";
+        }
+    ?>
 </main>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>

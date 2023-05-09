@@ -17,6 +17,8 @@ $max_file_size = 1024 * 1024 * 10;
 
 $dir = $repo["username"] . "/" . $repo["name"];
 
+$css = ["repos"];
+
 if (isset($_FILES["files"]) && isset($_POST["message"]) && !empty($_POST["message"])) {
     save_files($dir, $_FILES["files"], $_POST["message"]);
 

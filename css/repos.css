@@ -2,6 +2,16 @@ h3 {
     color: white;
 }
 
+.repo-nav {
+    border-bottom: 1px solid gray;
+} 
+
+main {
+    max-width: 900px;
+    padding: 0 20px;
+    margin: auto;
+}
+
 .repo {
     border-bottom: 1px solid gray;
     padding: 10px;
@@ -25,3 +35,159 @@ h3 {
     height: 19px;
     color: white;
 }
+
+code {
+    display: none;
+}
+
+.repo-tree {
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    border-spacing: 0;
+    table-layout: auto;
+}
+
+.repo-tree tr:hover {
+    background-color: var(--nav);
+}
+
+.repo-tree td, .repo-tree th {
+    padding: 16px 10px;
+    color: rgb(125, 133, 144);
+    border-bottom: 1px solid gray;
+    font-size: 14px;
+}
+
+.repo-tree th {
+    padding: 20px 10px;
+    background-color: var(--nav);
+}
+
+.repo-tree td a, .repo-tree th a {
+    color: rgb(125, 133, 144);
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.repo-tree th a span {
+    color: rgb(230, 237, 243);
+}
+
+.repo-tree svg {
+    display: inline-block;
+    vertical-align: bottom;
+} 
+
+.repo-tree th a:hover, .repo-tree th a:hover span {
+    color: var(--bg-hover);
+} 
+
+.repo-tree th a:hover path {
+    fill: var(--bg-hover);
+}
+
+.repo-tree th a path {
+    fill: rgb(230, 237, 243);
+}
+
+.repo-tree tr:last-child td {
+    border: none;
+}
+
+.repo-tree td:nth-child(2) a {
+    color: rgb(230, 237, 243);
+}
+
+.repo-tree td a:hover {
+    color: var(--bg-hover); 
+    text-decoration: underline;
+    transition: all 100ms ease-in-out;
+}
+
+.repo-tree td:first-child {
+    padding-right: 0;
+    width: 16px;
+}
+
+.repo-tree td path {
+    fill: rgb(125, 133, 144);
+}
+
+.repo-tree td:last-child, .repo-tree th:last-child {
+    text-align: right;
+}
+
+.repo-tree .commit-msg {
+    max-width: 100%; 
+}
+
+.repo-info {
+    padding: 20px 25px;
+}
+
+.repo-info path {
+    fill: rgb(125, 133, 144);
+}
+
+.repo-info h2 {
+    color: rgb(125, 133, 144);
+    font-size: 20px;
+    font-weight: 400;
+    display: inline;
+}
+
+.repo-owner, .repo-name {
+    color: var(--bg-hover);
+    text-decoration: none;
+}
+
+.repo-owner:hover, .repo-name:hover {
+    text-decoration: underline;
+}
+
+.repo-name {
+    font-weight: 600;
+}
+
+.repo-tree-top {
+    text-align: right;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.repo-tree-top a {
+    display: inline-block;
+    color: rgb(230, 237, 243);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.repo-tree-top .upload {
+    background-color: var(--nav);
+    outline: 1px solid gray;
+    outline-offset: -1px;
+}
+
+.repo-tree-top .download {
+    background-color: var(--btn-bg);
+    margin-right: 0;
+    transition: all 100ms ease-in-out;
+}
+
+.repo-tree-top .download:hover {
+    background-color: var(--btn-bg-hover);
+    color: #fff;
+}
+
+.repo-tree-top .download path {
+    fill: rgb(230, 237, 243);
+}
+
+.repo-tree-top .download svg {
+    display: inline-block;
+    vertical-align: middle;
+} 

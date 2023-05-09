@@ -35,3 +35,7 @@ function save_files($dir, $files, $msg) {
 
     commit($dir, $msg); 
 }
+
+function is_binary($file) {
+    return false === mb_detect_encoding(implode("\n", $file), null, true);
+}

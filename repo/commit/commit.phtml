@@ -1,0 +1,22 @@
+<?php
+require("../../head.phtml");
+require("../repo_head.phtml");
+?>
+
+    <div id="diff"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js"></script>
+<script>
+    const diff_el = document.querySelector("#diff");
+    
+    const diff2htmlUi = new Diff2HtmlUI(diff_el, <?= '`' . $diff . '`' ?>, {
+        diffStyle: "char",
+        highlight: true,
+    });
+
+    diff2htmlUi.draw();
+    diff2htmlUi.highlightCode();
+</script>
+
+</body>
+</html>

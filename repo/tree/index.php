@@ -24,6 +24,7 @@ $commit_count = get_commit_count($title, $commit);
 if (empty($_GET["path"])) $path = "";
 
 $commit_query = "&commit=$commit";
+$latest = false;
 
 $files = get_tree($title, $commit, $path);
 

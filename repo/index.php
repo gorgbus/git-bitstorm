@@ -13,12 +13,14 @@ $repo = get_repo($db, $_GET["name"]);
 if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["owner"] != $_SESSION["user"])) return require("../404.phtml");
 
 $title = $repo["username"] . "/" . $repo["name"];
+$css = ["repos"];
 
 $commit = get_latest_commit($title);
 $path = "";
 $commit_count = get_commit_count($title, $commit);
 
 $commit_query = "";
+$latest = true;
 
 $files = get_tree($title, $commit, $path);
 
