@@ -37,7 +37,7 @@ function get_commits($dir, $commit, $page) {
 
     if ($first_commit == $commit) $range = $commit;
     
-    exec("cd $dir && git log -n 20 --skip=$offset --format=" . '"%h %H %s"' . " $range --boundary", $commits);
+    exec("cd $dir && git log -n 20 --skip=$offset --date=format:" . '"%b %d, %Y"' . " --format=" . '"%h %H %ad %s"' . " $range --boundary", $commits);
 
     if (count($commits) < 1) return 0;
 
@@ -46,23 +46,62 @@ function get_commits($dir, $commit, $page) {
 
 function re_array_commits($commits) {
     $n_commits = [];
-    $i = 0;
 
     foreach ($commits as $commit) {
         $short_hash = substr($commit, 0, 7);
         $full_hash = substr($commit, 8, 40);
-        $msg = substr($commit, 49);
+        $date = substr($commit, 49, 12);
+        $msg = substr($commit, 62);
 
-        $n_commits[$i] = [
+        array_push($n_commits, [
             "short_hash" => $short_hash,
             "full_hash" => $full_hash,
             "msg" => $msg,
-        ];
-
-        $i++;
+            "date" => $date,
+        ]);
     }
 
-    return $n_commits;
+    return group_commits($n_commits);
+}
+
+function get_group($groups, $date) {
+    foreach ($groups as $group) {
+        if ($group["date"] == $date) return $group;
+    }
+
+    return 0;
+}
+
+function get_group_index($groups, $date) {
+    foreach ($groups as $i => $group) {
+        if ($group["date"] == $date) return $i;
+    }
+
+    return -1;
+}
+
+function group_commits($commits) {
+    $groups = [];
+
+    foreach ($commits as $commit) {
+        $group = get_group($groups, $commit["date"]);
+
+
+        if (!$group) {
+            array_push($groups, [
+                "date" => $commit["date"],
+                "commits" => [$commit],
+            ]);
+        } else {
+            $i = get_group_index($groups, $commit["date"]);
+
+            array_push($group["commits"], $commit);
+
+            $groups[$i] = $group;
+        }
+    }
+
+    return $groups;
 }
 
 function get_commit_count($dir, $commit) {
@@ -79,14 +118,14 @@ function get_commit_count($dir, $commit) {
     return (int) $count[0];
 }
 
-function commit($dir, $name) {
+function commit($dir, $msg, $user_id) {
     exec("cd $dir && git config user.email upload@email.com");
 
-    exec("cd $dir && git config user.name upload");
+    exec("cd $dir && git config user.name $user_id");
 
     exec("cd $dir && git add .");
 
-    exec("cd $dir && git commit -m " . '"' . $name . '"');
+    exec("cd $dir && git commit -m " . '"' . $msg. '"');
 }
 
 function init_repo($dir) {

@@ -2,28 +2,23 @@
 require("../../head.phtml");
 require("../repo_head.phtml");
 ?>
+    <?php foreach($commits as $group) : ?>
+        <p><?= $group["date"] ?></p> 
 
-    <table>
-        <?php foreach($commits as $commit) : ?>
-            <tr>
-                <td>
-                    <a>
-                        <?= $commit["msg"] ?>
-                    </a>    
-                </td>
-                <td>
-                    <a href="/repo/commit?name=<?= $repo["name"] ?>&commit=<?= $commit["short_hash"] ?>">
-                        <?= $commit["short_hash"] ?>
-                    </a>    
-                </td>
-                <td>
+        <?php foreach($group["commits"] as $commit) : ?>
+            <div>
+                <div>
+                    <?= $commit["msg"] ?>
+                </div>
+
+                <?= $commit["short_hash"] ?>
+
                 <a href="/repo/tree?name=<?= $repo["name"] ?>&commit=<?= $commit["full_hash"] ?>&path=">
-                        <>
-                    </a>
-                </td>
-            </tr>
+                    <>
+                </a>
+            </div>
         <?php endforeach ?>
-    </table>
+    <?php endforeach ?>
 </main>
 
 </body>
