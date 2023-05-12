@@ -54,7 +54,7 @@ code {
 
 .repo-tree td, .repo-tree th {
     padding: 16px 10px;
-    color: rgb(125, 133, 144);
+    color: var(--text-secondary);
     border-bottom: 1px solid gray;
     font-size: 14px;
 }
@@ -65,13 +65,13 @@ code {
 }
 
 .repo-tree td a, .repo-tree th a {
-    color: rgb(125, 133, 144);
+    color: var(--text-secondary);
     text-decoration: none;
     font-weight: 400;
 }
 
 .repo-tree th a span {
-    color: rgb(230, 237, 243);
+    color: var(--text);
 }
 
 .repo-tree svg {
@@ -88,7 +88,7 @@ code {
 }
 
 .repo-tree th a path {
-    fill: rgb(230, 237, 243);
+    fill: var(--text);
 }
 
 .repo-tree tr:last-child td {
@@ -96,13 +96,13 @@ code {
 }
 
 .repo-tree td:nth-child(2) a {
-    color: rgb(230, 237, 243);
+    color: var(--text);
 }
 
 .repo-tree td a:hover {
     color: var(--bg-hover); 
     text-decoration: underline;
-    transition: all 100ms ease-in-out;
+    transition: all 50ms ease-in-out;
 }
 
 .repo-tree td:first-child {
@@ -111,7 +111,7 @@ code {
 }
 
 .repo-tree td path {
-    fill: rgb(125, 133, 144);
+    fill: var(--text-secondary);
 }
 
 .repo-tree td:last-child, .repo-tree th:last-child {
@@ -127,11 +127,11 @@ code {
 }
 
 .repo-info path {
-    fill: rgb(125, 133, 144);
+    fill: var(--text-secondary);
 }
 
 .repo-info h2 {
-    color: rgb(125, 133, 144);
+    color: var(--text-secondary);
     font-size: 20px;
     font-weight: 400;
     display: inline;
@@ -158,7 +158,7 @@ code {
 
 .repo-tree-top a {
     display: inline-block;
-    color: rgb(230, 237, 243);
+    color: var(--text);
     text-decoration: none;
     font-size: 14px;
     padding: 10px;
@@ -170,12 +170,17 @@ code {
     background-color: var(--nav);
     outline: 1px solid gray;
     outline-offset: -1px;
+    transition: all 50ms ease-in-out;
+}
+
+.repo-tree-top .upload:hover {
+    background-color: var(--btn-hover-secondary);
 }
 
 .repo-tree-top .download {
     background-color: var(--btn-bg);
     margin-right: 0;
-    transition: all 100ms ease-in-out;
+    transition: all 50ms ease-in-out;
 }
 
 .repo-tree-top .download:hover {
@@ -184,7 +189,7 @@ code {
 }
 
 .repo-tree-top .download path {
-    fill: rgb(230, 237, 243);
+    fill: var(--text);
 }
 
 .repo-tree-top .download svg {

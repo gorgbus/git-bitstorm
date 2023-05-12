@@ -1,5 +1,5 @@
 <?php
 
-$db = mysqli_connect("localhost", "root", "", "zwa-proj");
+$db = mysqli_connect("localhost", "root", "", "glet-proj");
 
 mysqli_set_charset($db, "UTF8");

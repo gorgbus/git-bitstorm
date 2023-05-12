@@ -14,7 +14,7 @@ function re_array_files($file_post) {
     return $file_ary;
 }
 
-function save_files($dir, $files, $msg) {
+function save_files($dir, $files, $msg, $user_id) {
     $files = re_array_files($files);
     $dir = __DIR__ . "/../repositories/" . $dir;
 
@@ -33,7 +33,7 @@ function save_files($dir, $files, $msg) {
         else echo "Error uploading file $name";
     }
 
-    commit($dir, $msg); 
+    commit($dir, $msg, $user_id); 
 }
 
 function is_binary($file) {

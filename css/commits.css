@@ -1,0 +1,56 @@
+.date {
+    color: var(--text-secondary);
+    margin-top: 10px;
+}
+
+.commit {
+    border: 1px solid gray;
+    border-radius: 4px;
+    color: var(--text);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 14px;
+    transition: all 50ms ease-in-out;
+}
+
+.commit:hover {
+    background-color: var(--nav);
+}
+
+.commit a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: var(--nav);
+    border-radius: 4px;
+    border: 1px solid gray;
+    margin: 0 5px;
+    display: inline-block;
+    transition: all 50ms ease-in-out;
+}
+
+.commit a:hover {
+    background-color: var(--btn-hover-secondary);
+}
+
+.commit .tree-btn svg {
+    display: inline-block;
+    vertical-align: middle;
+    align-self: middle;
+}
+
+.commit .tree-btn path {
+    fill: var(--text);
+    transition: all 50ms ease-in-out;
+}
+
+.commit .tree-btn:hover path {
+    fill: var(--bg-hover);
+}
+
+.commit .diff-btn {
+    color: var(--bg-hover);
+}
