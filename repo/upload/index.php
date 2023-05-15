@@ -20,7 +20,7 @@ $dir = $repo["username"] . "/" . $repo["name"];
 $css = ["repos"];
 
 if (isset($_FILES["files"]) && isset($_POST["message"]) && !empty($_POST["message"])) {
-    save_files($dir, $_FILES["files"], $_POST["message"], $_SESSION["user"]);
+    save_files($dir, $_FILES["files"], $_POST["message"], $repo["username"]);
 
     header("Location: /repo/?name=" . $repo["name"]);
 }

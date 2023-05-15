@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&display=swap');
+
 .date {
     color: var(--text-secondary);
     margin-top: 10px;
@@ -53,4 +55,48 @@
 
 .commit .diff-btn {
     color: var(--bg-hover);
+    font-family: Roboto, monospace;
+    width: 50px;
+}
+
+.page-nav {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-nav a {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--bg-hover);
+    font-size: 14px;
+    background-color: var(--nav);
+    transition: all 50ms ease-in-out;
+}
+
+.page-nav a:hover {
+    background-color: var(--btn-hover-secondary);
+}
+
+.page-nav a:first-child {
+    /* border-right: none; */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.page-nav a:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.page-nav .disable {
+    pointer-events: none;
+    opacity: .5;
+    background-color: transparent;
 }

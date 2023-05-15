@@ -23,21 +23,18 @@ function get_first_commit($dir) {
     return $first_commit[0];
 }
 
-function get_commits($dir, $commit, $page) {
+function get_commits($dir, $commit, $page, $page_size) {
     $dir = __DIR__ . "/../repositories/" . $dir;
 
     if (!file_exists($dir)) return 0;
 
-    $first_commit = get_first_commit($dir);
-
     $commits = [];
-    $offset = 20 * ($page - 1);
+    $offset = $page_size * ($page - 1);
 
-    $range = "$first_commit..$commit";
-
-    if ($first_commit == $commit) $range = $commit;
+    $empty_tree = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
+    $range = "$empty_tree..$commit";
     
-    exec("cd $dir && git log -n 20 --skip=$offset --date=format:" . '"%b %d, %Y"' . " --format=" . '"%h %H %ad %s"' . " $range --boundary", $commits);
+    exec("cd $dir && git log -n $page_size --skip=$offset --date=format:" . '"%b %d, %Y"' . " --format=" . '"%h %H %ad %s"' . " $range", $commits);
 
     if (count($commits) < 1) return 0;
 
@@ -118,10 +115,10 @@ function get_commit_count($dir, $commit) {
     return (int) $count[0];
 }
 
-function commit($dir, $msg, $user_id) {
+function commit($dir, $msg, $username) {
     exec("cd $dir && git config user.email upload@email.com");
 
-    exec("cd $dir && git config user.name $user_id");
+    exec("cd $dir && git config user.name $username");
 
     exec("cd $dir && git add .");
 
@@ -154,12 +151,10 @@ function re_array_tree($dir, $tree, $commit) {
         $hash = substr($file, $type_start + 6, 40);
         $name = substr($file, $type_start + 47);
         
-        $first_commit = get_first_commit($dir);
+        $empty_tree = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
 
         $commit_info = [];
-        $range = "$first_commit..$commit";
-
-        if ($first_commit == $commit) $range = $commit;
+        $range = "$empty_tree..$commit";
 
         exec("cd $dir && git log -n 1 --format=" . '"%s%n%ar%n%H"' . " --find-object=$hash $range --boundary", $commit_info);
 
@@ -218,11 +213,11 @@ function get_prev_commit($dir, $commit) {
     $dir = __DIR__ . "/../repositories/" . $dir;
     $prev_commit = [];
 
-    if ($commit == get_first_commit($dir)) return $commit;
-
     if (!file_exists($dir)) return [];
 
     exec("cd $dir && git log -n 1 --format=" . '"%H"' . " $commit~1", $prev_commit);
+
+    if (empty($prev_commit)) return $commit;
 
     return $prev_commit[0];
 }

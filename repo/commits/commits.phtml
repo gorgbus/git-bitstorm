@@ -25,6 +25,11 @@ require("../repo_head.phtml");
             </div>
         <?php endforeach ?>
     <?php endforeach ?>
+
+    <div class="page-nav">
+        <a <?php if ($page == 1) echo "class='disable'" ?> href="/repo/commits?<?= $commits_url ?>&page=<?= $page - 1 ?>" >newer</a>
+        <a <?php if ($last_page) echo "class='disable'" ?> href="/repo/commits?<?= $commits_url ?>&page=<?= $page + 1 ?>">older</a>
+    </div>
 </main>
 
 </body>
