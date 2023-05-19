@@ -1,18 +1,20 @@
 main {
-    background-color: var(--bg-darker);
+    background-color: var(--bg);
 }
 
 .my-repos {
-    width: 250px;
-    padding: 20px 10px;
-    background-color: var(--bg);
-    height: calc(100vh - 100px);
+    max-width: 1100px;
+    padding: 0 20px;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .my-repos div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
 }
 
 .my-repos h3 {
@@ -38,11 +40,29 @@ main {
     background-color: var(--btn-bg-hover);
 }
 
+.repo {
+    border-bottom: 1px solid gray;
+    padding: 20px 10px;
+}
+
 .repo a {
-    color: white;
+    color: var(--bg-hover);
     text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .repo a:hover {
     text-decoration: underline;
+}
+
+.repo span {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 20px;
+    color: gray;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 4px;
+    vertical-align: top;
 }

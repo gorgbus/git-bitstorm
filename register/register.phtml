@@ -2,7 +2,9 @@
 require("../head.phtml");
 ?>
 
-<form method="post">
+<form class="login-form" method="post">
+    <h2>Register</h2>
+
     <div>
         <label for="username">username</label>
         <input type="text" name="username" id="username" required>
@@ -19,11 +21,18 @@ require("../head.phtml");
     </div>
 
     <button type="submit">Register</button>
-</form>
 
-<p>
-    <?= $status ?>
-</p>
+    <span>
+        or
+        <a href="/login">
+            log in
+        </a>
+    </span>
+
+    <p>
+        <?= $status ?>
+    </p>
+</form>
 
 </body>
 </html>

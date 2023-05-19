@@ -19,6 +19,8 @@ require("head.phtml");
                         <a href="/repo/?name=<?= $repo["name"] ?>">
                             <?= $repo["name"] ?>
                         </a>
+
+                        <span><?php if ($repo["private"] == 0) echo "Public"; else echo "Private"; ?></span>
                     </li>
                 <?php endforeach; ?>
             </ul>

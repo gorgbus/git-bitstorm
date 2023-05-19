@@ -5,6 +5,7 @@ require("../db.php");
 require("../fns/user.php");
 
 $title = "Login";
+$css = ["login"];
 
 if ($logged_in) {
     header("Location: /");
