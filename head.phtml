@@ -25,7 +25,11 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
         <link rel="stylesheet" href="/css/<?= $c ?>.css">
     <?php endforeach; ?>
 
-    <script src="/search.js" defer></script>
+    <?php if (isset($js)) foreach ($js as $j): ?> 
+        <script src="/js/<?= $j ?>.js" defer></script>
+    <?php endforeach; ?>
+
+    <script src="/js/search.js" defer></script>
 </head>
 
 <body>

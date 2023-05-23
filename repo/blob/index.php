@@ -22,4 +22,6 @@ $path = $_GET["path"];
 
 $file = get_file($title, $commit, $path);
 
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
+
 require("blob.phtml");

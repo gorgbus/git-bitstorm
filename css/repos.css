@@ -196,3 +196,41 @@ code {
     display: inline-block;
     vertical-align: middle;
 } 
+
+.repo-nav .nav-btns {
+    padding-left: 25px;
+}
+
+.repo-nav .nav-btns a {
+    display: inline-block;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 1px;
+    text-decoration: none;
+}
+
+.repo-nav .nav-btns .active {
+    border-bottom: 3px solid rgb(247, 129, 102);
+    margin-bottom: -1px;
+}
+
+.repo-nav .nav-btns svg {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.repo-nav .nav-btns path {
+    fill: var(--text-secondary);
+}
+
+.repo-nav .nav-btns span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px 0;
+}
+
+.repo-nav .nav-btns a:hover span {
+    border-radius: 4px;
+    background-color: var(--btn-hover-secondary);
+}

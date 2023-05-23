@@ -1,0 +1,102 @@
+<?php
+require("../../head.phtml");
+require("../repo_head.phtml");
+?>
+
+<main>
+    <form class="settings-rename" method="post">
+        <label for="repo-rename">Repository name</label>
+        <input id="repo-rename" name="repo-rename" minlength="3" maxlength="32" required value="<?= $repo["name"] ?>" ="text" id="repo_name" name="repo_name"/>
+
+        <button type="submit">
+            Rename
+        </button>
+
+        <p>
+            <?= $status ?>
+        </p>
+    </form>
+
+    <div class="settings-danger">
+        <div class="visibility setting-danger">
+            <div>
+                <h4>
+                    Change repository visibility
+                </h4>
+
+                <p>
+                    This repository is currently <?php if ($repo["private"]) echo "private"; else echo "public"; ?>
+                </p>
+            </div>
+
+            <button data-modal="repo-visibility" class="open-modal-btn">Change visibility</button>
+
+            <dialog data-modal="repo-visibility" class="modal">
+                <form method="post">
+                    <div class="modal-head">
+                        <span>Make <?= $repo["username"] ?>/<?= $repo["name"] ?> <?php if ($repo["private"] == 0) echo "private"; else echo "public"; ?></span>
+
+                        <button data-modal="repo-visibility" class="close-btn" type="submit" formmethod="dialog">
+                            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                                <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div>
+                        <h3><?= $repo["username"] ?>/<?= $repo["name"] ?></h3>
+                    </div>
+
+                    <div>
+                        <label for="repo-visibility">To confirm, type "<?= $repo["username"] . "/" . $repo["name"] ?>"</label>
+                        <input data-confirm="<?= $repo["username"] ?>/<?= $repo["name"] ?>" data-modal="repo-visibility" autocomplete="off" required id="repo-visibility" name="repo-visibility">
+
+                        <button data-modal="repo-visibility" class="confirm-btn" type="submit" disabled>Make this repository <?php if ($repo["private"] == 0) echo "private"; else echo "public"; ?></button>
+                    </div>
+                </form>
+            </dialog>
+        </div>
+
+        <div class="deletion setting-danger">
+            <div>
+                <h4>
+                    Delete this repository
+                </h4>
+
+                <p>
+                    You cannot undo this action
+                </p>
+            </div>
+
+            <button data-modal="delete-repo" class="open-modal-btn">Delete this repository</button>
+
+            <dialog data-modal="delete-repo" class="modal">
+                <form method="post">
+                    <div class="modal-head">
+                        <span>Delete <?= $repo["username"] ?>/<?= $repo["name"] ?></span>
+
+                        <button data-modal="delete-repo" class="close-btn" type="submit" formmethod="dialog">
+                            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                                <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div>
+                        <h3><?= $repo["username"] ?>/<?= $repo["name"] ?></h3>
+                    </div>
+
+                    <div>
+                        <label for="repo-deletion">To confirm, type "<?= $repo["username"] . "/" . $repo["name"] ?>"</label>
+                        <input data-confirm="<?= $repo["username"] ?>/<?= $repo["name"] ?>" data-modal="delete-repo" autocomplete="off" required id="repo-deletion" name="repo-deletion">
+
+                        <button data-modal="delete-repo" class="confirm-btn" type="submit" disabled>Delete this repository</button>
+                    </div>
+                </form>
+            </dialog>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

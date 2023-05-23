@@ -38,4 +38,6 @@ $last_page = ceil($commit_count / $page_size) < $page + 1 && 1 < $page + 1;
 
 $commits = get_commits($title, $commit, $page, $page_size);
 
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
+
 require("commits.phtml");

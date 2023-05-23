@@ -1,6 +1,6 @@
 <?php
 function get_latest_commit($dir) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
 
     if (!file_exists($dir)) return 0;
 
@@ -24,7 +24,7 @@ function get_first_commit($dir) {
 }
 
 function get_commits($dir, $commit, $page, $page_size) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
 
     if (!file_exists($dir)) return 0;
 
@@ -102,7 +102,7 @@ function group_commits($commits) {
 }
 
 function get_commit_count($dir, $commit) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
 
     if (!file_exists($dir)) return 0;
      
@@ -130,7 +130,7 @@ function init_repo($dir) {
 }
 
 function get_tree($dir, $commit, $path) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
     $tree = [];
 
     if (!file_exists($dir)) return [];
@@ -142,7 +142,6 @@ function get_tree($dir, $commit, $path) {
 
 function re_array_tree($dir, $tree, $commit) {
     $n_tree = [];
-    $i = 0;
 
     foreach ($tree as $file) {
         $type_start = strpos($file, " ");
@@ -168,22 +167,32 @@ function re_array_tree($dir, $tree, $commit) {
             $file_commit = $commit_info[2];
         } 
 
-        $n_tree[$i] = [
+        array_push($n_tree, [
             "type" => $type,
             "name" => $name,
             "msg" => $msg,
             "date" => $date,
             "commit" => $file_commit,
-        ];
-
-        $i++;
+        ]);
     }
+
+    $trees = array_filter($n_tree, function($t) { return $t["type"] == "tree"; });
+    $blobs = array_filter($n_tree, function($t) { return $t["type"] == "blob"; });
+
+    function cmp($a, $b) {
+        return strcmp($a["name"], $b["name"]);
+    }
+
+    usort($trees, "cmp");
+    usort($blobs, "cmp");
+
+    $n_tree = array_merge($trees, $blobs);
 
     return $n_tree;
 }
 
 function get_file($dir, $commit, $path) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
     $file = [];
 
     if (!file_exists($dir)) return [];
@@ -194,7 +203,7 @@ function get_file($dir, $commit, $path) {
 }
 
 function get_diff($dir, $old_commit, $new_commit) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
     $diff = [];
 
     if (!file_exists($dir)) return [];
@@ -210,7 +219,7 @@ function get_diff($dir, $old_commit, $new_commit) {
 }
 
 function get_prev_commit($dir, $commit) {
-    $dir = __DIR__ . "/../repositories/" . $dir;
+    $dir = REPO . $dir;
     $prev_commit = [];
 
     if (!file_exists($dir)) return [];
@@ -223,11 +232,11 @@ function get_prev_commit($dir, $commit) {
 }
 
 function create_zip($username, $repo_name, $commit) {
-    $dir = __DIR__ . "/../repositories/" . $username . "/" . $repo_name;
+    $dir = REPO . $username . "/" . $repo_name;
 
     if (!file_exists($dir)) return 0; 
 
-    $out_dir = __DIR__ . "/../tmp/" . $username;
+    $out_dir = __REPO__ . "/../tmp/" . $username;
     $output = $out_dir . "/" . $repo_name;
 
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
@@ -242,11 +251,11 @@ function create_zip($username, $repo_name, $commit) {
 }
 
 function create_file($username, $repo_name, $file, $commit) {
-    $dir = __DIR__ . "/../repositories/" . $username . "/" . $repo_name;
+    $dir = REPO . $username . "/" . $repo_name;
 
     if (!file_exists($dir)) return 0; 
 
-    $out_dir = __DIR__ . "/../tmp/" . $username;
+    $out_dir = __REPO__ . "/../tmp/" . $username;
     $output = $out_dir . "/" . pathinfo($file, PATHINFO_FILENAME);
 
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;

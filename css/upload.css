@@ -1,0 +1,156 @@
+main {
+    max-width: 1100px;
+}
+
+.drag-upload {
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.drop-border {
+    padding: 50px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.show-border {
+    border: 2px dashed grey;
+    margin: -2px;
+}
+
+.drag-upload svg path {
+    fill: var(--text-secondary);
+}
+
+.drag-upload p {
+    color: var(--text);
+}
+
+.drag-upload span {
+    color: var(--text-secondary);
+}
+
+.drag-upload .choose-files {
+    color: var(--bg-hover);
+    cursor: pointer;
+}
+
+.drag-upload .choose-files:hover {
+    text-decoration: underline;
+} 
+
+.show-border span {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.commit-upload {
+    margin: auto;
+    max-width: 1000px;
+}
+
+.commit-upload div {
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.commit-upload div label {
+    display: block;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.commit-upload div input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: var(--bg-darker);
+    color: var(--text);
+    box-sizing: border-box;
+    margin: -1px;
+}
+
+.commit-upload button {
+    height: 30px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    background-color: var(--btn-bg);
+    cursor: pointer;
+    transition: all 50ms ease-in-out;
+}
+
+.commit-upload button:hover {
+    background-color: var(--btn-bg-hover);
+}
+
+.commit-upload button:disabled {
+    opacity: .6;
+    cursor: default;
+    background-color: var(--btn-bg);
+}
+
+.files {
+    list-style: none;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.files:empty {
+    display: none;
+}
+
+.files li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.files li:last-child {
+    border: none;
+}
+
+.files li span {
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.files li div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.files li div path {
+    fill: var(--text);
+}
+
+.files li .remove-btn {
+    cursor: pointer;
+}
+
+.files li .remove-btn:hover path {
+    fill: var(--bg-hover);
+}

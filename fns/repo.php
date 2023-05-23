@@ -1,7 +1,6 @@
 <?php
 
-function repo_exists($db, $name)
-{
+function repo_exists($db, $name) {
     $sql = "
         select *
         from repository
@@ -22,8 +21,7 @@ function repo_exists($db, $name)
     return 0;
 }
 
-function create_repo($db, $name, $private, $owner)
-{
+function create_repo($db, $name, $private, $owner) {
     if (repo_exists($db, $name)) {
         return -1;
     }
@@ -44,8 +42,7 @@ function create_repo($db, $name, $private, $owner)
     return 1;
 }
 
-function get_repos($db, $user_id, $visitor_id)
-{
+function get_repos($db, $user_id, $visitor_id) {
     $sql = "
         select *
         from repository
@@ -64,8 +61,7 @@ function get_repos($db, $user_id, $visitor_id)
     return $repos;
 }
 
-function get_repo($db, $name)
-{
+function get_repo($db, $name) {
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
@@ -84,8 +80,7 @@ function get_repo($db, $name)
     return $repo;
 }
 
-function search_repos($db, $name, $visitor_id)
-{
+function search_repos($db, $name, $visitor_id) {
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
@@ -104,8 +99,7 @@ function search_repos($db, $name, $visitor_id)
     return $repos;
 }
 
-function search_my_repos($db, $name, $user_id)
-{
+function search_my_repos($db, $name, $user_id) {
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
@@ -122,4 +116,56 @@ function search_my_repos($db, $name, $user_id)
     $repos = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
     return $repos;
+}
+
+function change_visibility($db, $name, $new_vis) {
+    $sql = "
+        update repository set private = $new_vis
+        where name like '$name'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+        return 0; 
+    }
+
+    return 1;
+}
+
+function delete_repo($db, $name) {
+    $sql = "
+        delete from repository
+        where name like '$name'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+        return 0;
+    }
+
+    return 1;
+}
+
+function rename_repo($db, $name, $new_name) {
+    if (repo_exists($db, $new_name)) {
+        return -1;
+    }
+    
+    $sql = "
+        update repository set name = '$new_name'
+        where name like '$name'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+        return 0;
+    }
+
+    return 1;
 }

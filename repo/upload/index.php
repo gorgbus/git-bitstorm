@@ -17,12 +17,17 @@ $max_file_size = 1024 * 1024 * 10;
 
 $dir = $repo["username"] . "/" . $repo["name"];
 
-$css = ["repos"];
+$css = ["repos", "upload"];
+$js = ["upload"];
+
 
 if (isset($_FILES["files"]) && isset($_POST["message"]) && !empty($_POST["message"])) {
     save_files($dir, $_FILES["files"], $_POST["message"], $repo["username"]);
 
     header("Location: /repo/?name=" . $repo["name"]);
+    exit;
 }
+
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 require("upload.phtml");

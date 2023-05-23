@@ -1,4 +1,6 @@
 <?php
+define("REPO", __DIR__ . "/repositories/");
+
 session_start();
 
 if (isset($_SESSION["user"])) $logged_in = 1;

@@ -21,4 +21,6 @@ $diff = get_diff($title, $prev_commit, $_GET["commit"]);
 $diff = str_replace("\\", "\\" . "\\", $diff);
 $diff = str_replace("`", "\`", $diff);
 
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
+
 require("commit.phtml");

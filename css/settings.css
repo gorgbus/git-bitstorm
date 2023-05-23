@@ -1,0 +1,107 @@
+.settings-rename {
+    margin-top: 20px;
+}
+
+.settings-rename input {
+    background-color: var(--bg-darker);
+    color: var(--text);
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.settings-rename input:focus {
+    outline: 2px solid var(--bg-hover);
+}
+
+.settings-rename label {
+    display: block;
+    margin: 5px 0;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.settings-rename button {
+    background-color: var(--nav);
+    color: var(--text);
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.settings-danger {
+    margin-top: 20px;
+    border: 1px solid red;
+    border-radius: 4px;
+}
+
+.settings-danger .setting-danger { 
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.settings-danger .setting-danger:last-child {
+    border-bottom: none;
+} 
+
+.settings-danger .setting-danger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-danger .setting-danger .open-modal-btn {
+    background-color: var(--nav);
+    color: red;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 50ms ease-in-out;
+}
+
+.settings-danger .setting-danger .open-modal-btn:hover {
+    background-color: red;
+    color: var(--text);
+} 
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid gray;
+    background-color: var(--nav);
+    box-shadow: rgb(48, 54, 61) 0px 0px 0px 1px, rgba(1, 4, 9, 0.85) 0px 16px 32px 0px;
+}
+
+dialog::backdrop {
+    background-color: rgba(110, 118, 129, 0.4);
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    transition: all 50ms ease-in-out;
+}
+
+.close-btn:hover {
+    background-color: var(--btn-hover-secondary);
+}
+
+.modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

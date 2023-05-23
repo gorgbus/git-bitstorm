@@ -2,22 +2,31 @@
 require("../../head.phtml");
 require("../repo_head.phtml");
 ?>
+<main>
+    <form data-repo="<?= $repo["name"] ?>" data-max_size=<?= $max_file_size ?> method="post" enctype="multipart/form-data">
+	    <div class="drag-upload">
+            <div class="drop-border">
+                <svg height="32" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" data-view-component="true">
+                    <path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm2-.5a.5.5 0 0 0-.5.5v18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4Zm10 0v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5Z"></path>
+                </svg>
+                
+                <p>Drag additional files here to add them to your repository</p>
+                <span class="span-wrap">Or <span class="choose-files">choose your files</span></span>
+            </div>
 
-	<h3>Upload files</h3>
-	
-	<form method="post" enctype="multipart/form-data">
-	    <div>
-	        <label>choose files</label>
-	        <input type="hidden" name="MAX_FILE_SIZE" value="<?= $max_file_size ?>">
-	        <input type="file" name="files[]" id="files" multiple required>
+	        <input type="file" name="files[]" id="files" multiple hidden>
 	    </div>
 
-        <div>
-            <label for="message">message</label>
-            <input type="text" name="message" id="message" required>
+        <ul class="files"></ul>
+
+        <div class="commit-upload">
+            <div>
+                <label for="message">Commit message</label>
+                <input type="text" name="message" id="message" required>
+            </div>
+        
+            <button type="submit">Commit changes</button>
         </div>
-	
-	    <button type="submit">Commit changes</button>
 	</form>
 </main>
 

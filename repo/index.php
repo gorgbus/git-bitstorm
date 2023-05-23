@@ -24,4 +24,6 @@ $latest = true;
 
 $files = get_tree($title, $commit, $path);
 
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
+
 require("repo.phtml");
