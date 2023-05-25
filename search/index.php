@@ -1,8 +1,11 @@
 <?php
 require("../db.php");
+require("../session.php");
+
 require("../fns/repo.php");
 require("../fns/user.php");
-require("../session.php");
+
+require("../user.php");
 
 $title = "Search";
 $css = ["repos"];

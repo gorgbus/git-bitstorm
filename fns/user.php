@@ -60,7 +60,7 @@ function user_exists($db, $username) {
 
 function get_user($db, $user_id) {
     $sql = "
-        select username
+        select id, username, name
         from user
         where id = $user_id
     ";
@@ -91,4 +91,32 @@ function search_users($db, $username) {
     $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
     return $users;
+}
+
+function change_user_name($db, $username, $new_name) {
+    $sql = "
+        update user set name = '$new_name'
+        where username like '$username'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+    }
+}
+
+function change_user_password($db, $username, $new_password) {
+    $new_password = sha1($new_password);
+
+    $sql = "
+        update user set password = '$new_password'
+        where username like '$username'
+    ";
+
+    $res = mysqli_query($db, $sql);
+
+    if (!$res) {
+        echo mysqli_error($db);
+    }
 }

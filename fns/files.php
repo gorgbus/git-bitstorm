@@ -80,3 +80,57 @@ function rename_repo_dir($username, $name, $new_name) {
     
     rename($dir . "/" . $name, $dir . "/" . $new_name);
 }
+
+function save_profile_picture($username, $picture) {
+    $dir = BASE . "/profile_pics/" . $username;
+
+    if (!file_exists($dir)) mkdir($dir, 0777, true);
+
+    if ($picture["error"] == 0) {
+        list($width, $height, $type) = getimagesize($picture["tmp_name"]);
+
+        $orig_picture = null;
+
+        switch ($type) {
+            case IMAGETYPE_PNG: $orig_picture = imagecreatefrompng($picture["tmp_name"]); break;
+            case IMAGETYPE_JPEG: $orig_picture = imagecreatefromjpeg($picture["tmp_name"]); break;
+            case IMAGETYPE_WEBP: $orig_picture = imagecreatefromwebp($picture["tmp_name"]);
+        }
+
+        $square_size = min($width, $height);
+
+        $webp_picture = imagecreatetruecolor($square_size, $square_size);
+        $background = imagecolorallocatealpha($webp_picture, 0, 0, 0, 127);
+
+        imagefill($webp_picture, 0, 0, $background);
+        imagesavealpha($webp_picture, true);
+
+        imagecopyresampled($webp_picture, $orig_picture, 0, 0, 0, 0, $square_size, $square_size, $width, $height);
+
+        imagewebp($webp_picture, $dir . "/full.webp");
+
+        $small_picture = imagecreatetruecolor(40, 40);
+
+        imagefill($small_picture, 0, 0, $background);
+        imagesavealpha($small_picture, true);
+
+        imagecopyresampled($small_picture, $webp_picture, 0, 0, 0, 0, 40, 40, $square_size, $square_size);
+
+        imagewebp($small_picture, $dir . "/small.webp");
+
+        imagedestroy($orig_picture);
+        imagedestroy($webp_picture);
+        imagedestroy($small_picture);
+    }
+}
+
+function get_profile_picture($username) {
+    $dir = BASE . "/profile_pics/" . $username;
+
+    if (!file_exists($dir . "/full.webp")) return 0;
+
+    return [
+        "full" => $dir . "/full.webp",
+        "small" => $dir . "/small.webp",
+    ];
+}

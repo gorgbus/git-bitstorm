@@ -7,7 +7,7 @@ pre code.hljs {
  max-width: 1100px;
  margin: auto;
  font-size: 12px;
- border: 1px solid gray;
+ border: 1px solid var(--border);
  border-radius: 5px;
 }
 code.hljs {

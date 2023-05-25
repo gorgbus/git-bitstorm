@@ -14,7 +14,7 @@ main {
     align-items: center;
     justify-content: space-between;
     padding-bottom: 20px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
 }
 
 .my-repos h3 {
@@ -41,7 +41,7 @@ main {
 }
 
 .repo {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
     padding: 20px 0;
 }
 
@@ -58,9 +58,9 @@ main {
 
 .repo span {
     display: inline-block;
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     border-radius: 20px;
-    color: gray;
+    color: var(--border);
     font-size: 10px;
     font-weight: 600;
     padding: 2px 4px;

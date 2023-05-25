@@ -1,5 +1,7 @@
-const modals = document.querySelectorAll(".modal");
+const modals = document.querySelectorAll(".modal, .dialog");
+const dialogs = document.querySelectorAll(".dialog");
 const open_btns = document.querySelectorAll(".open-modal-btn");
+const open_dialog_btns = document.querySelectorAll(".open-dialog-btn");
 const close_btns = document.querySelectorAll(".modal-head .close-btn");
 const confirm_btns = document.querySelectorAll(".modal .confirm-btn");
 const inputs = document.querySelectorAll(".modal input");
@@ -19,6 +21,18 @@ open_btns.forEach((open) => {
         if (!modal) return;
 
         modal.showModal();
+    });
+});
+
+open_dialog_btns.forEach((open) => {
+    open.addEventListener("click", () => {
+        const dialog = get_modal(open.dataset.modal);
+
+        if (!dialog) return;
+
+        if (dialog.open) return dialog.close();
+
+        dialog.show();
     });
 });
 
@@ -47,6 +61,12 @@ modals.forEach((modal) => {
     });
 });
 
+document.addEventListener("mousedown", (e) => {
+    if (e.target.closest(".open-dialog-btn")) return;
+
+    if (!e.target.closest(".dialog")) dialogs.forEach((dialog) => dialog.close());
+});
+
 const get_confirm_btn = (modal_name) => {
     for (const confirm of confirm_btns) {
         if (confirm.dataset.modal === modal_name) return confirm;
@@ -64,4 +84,16 @@ inputs.forEach((input) => {
         if (input.dataset.confirm === input.value) confirm.disabled = false;
         else confirm.disabled = true;
     });
+});
+
+const picture_input = document.querySelector(".picture-upload-wrap #picture");
+const picture_form = document.querySelector(".picture-upload-wrap form");
+const picture_upload = document.querySelector(".picture-upload-wrap");
+
+picture_upload.addEventListener("click", () => {
+    picture_input.click();
+});
+
+picture_input.addEventListener("change", () => {
+    picture_form.submit();
 });

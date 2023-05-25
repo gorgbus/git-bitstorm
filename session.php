@@ -1,5 +1,6 @@
 <?php
 define("REPO", __DIR__ . "/repositories/");
+define("BASE", __DIR__);
 
 session_start();
 

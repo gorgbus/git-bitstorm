@@ -7,6 +7,9 @@ if (!$logged_in) return require("../../404.phtml");
 require("../../fns/git.php");
 require("../../fns/files.php");
 require("../../fns/repo.php");
+require("../../fns/user.php");
+
+require("../../user.php");
 
 $repo = get_repo($db, $_GET["name"]);
 

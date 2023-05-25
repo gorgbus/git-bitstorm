@@ -9,6 +9,9 @@ $title = "New Repository";
 require("create.phtml");
 
 require("../../fns/repo.php");
+require("../../fns/user.php");
+
+require("../../user.php");
 
 if (isset($_POST["name"]) && !empty($_POST["name"])) {
     $name = $_POST["name"];

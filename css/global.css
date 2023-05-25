@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
 
 :root {
     --nav: #161b22;
@@ -9,8 +9,11 @@
     --btn-bg-hover: #2ea043;
     --btn-bg: #238636;
     --text: #e6edf3;
+    --border: #30363d;
+    --border-red: rgba(248,81,73,0.4);
+    --red: #da3633;
     --text-secondary: #7d8590;
-    --btn-hover-secondary: #30363d;
+    --btn-hover-secondary: var(--border);
 }
 
 * {
@@ -37,6 +40,14 @@ body {
     float: left;
 }
 
+.main-nav ul .sign {
+    float: right;
+}
+
+.main-nav ul .register {
+    margin-right: 20px;
+}
+
 .main-nav ul li a {
     display: block;
     color: #fff;
@@ -45,6 +56,94 @@ body {
     transition: all 50ms ease-in-out;
     padding: 20px;
 }
+
+.main-nav ul .register a {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.main-nav ul .sign .profile-wrap {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.main-nav ul .sign .profile {
+    width: 20px;
+    height: 20px;
+    background-color: var(--btn-hover-secondary);
+    border: 1px solid var(--btn-hover-secondary);
+    border-radius: 50%;
+}
+
+.main-nav ul .sign .profile img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.main-nav ul .sign .drop-down {
+    border-bottom-color: #0000;
+    border-left-color: #0000;
+    border-right-color: #0000;
+    border-style: solid;
+    border-width: max(4px, 0.25rem) max(4px, 0.25rem) 0;
+    color: var(--text);
+    margin-left: 5px;
+    transition: all 50ms ease-in-out;
+}
+
+.main-nav ul .sign:hover .drop-down {
+    color: var(--text-secondary);
+}
+
+.main-nav ul .dialog {
+    position: absolute;
+    float: right;
+    top: 80%;
+    left: 70%;
+    translate: -100% 0; 
+    margin-right: 200px;
+    font-size: 14px;
+    min-width: 100px;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: var(--nav);
+    color: var(--text);
+}
+
+.main-nav ul .dialog div:first-child {
+    padding: 5px 10px;
+}
+
+.main-nav ul .dialog div {
+    border-bottom: 1px solid var(--border);
+}
+
+.main-nav ul .dialog div:last-child {
+    border: none;
+}
+
+.main-nav ul .dialog a {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 10px;
+}
+
+.main-nav ul .dialog a:hover {
+    background-color: var(--bg-hover);
+    color: var(--text);
+}
+
+.main-nav ul .dialog a:focus {
+    outline: none;
+} 
 
 .main-nav ul li a:hover {
     color: var(--text-hover);
@@ -63,7 +162,7 @@ body {
 #search {
     width: var(--search-w);
     height: 20px;
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     background-color: var(--bg);
     color: white;
     border-radius: 4px;
@@ -83,7 +182,7 @@ body {
 }
 
 .s-type {
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     width: var(--search-w);
     height: 25px;
     background-color: var(--bg);

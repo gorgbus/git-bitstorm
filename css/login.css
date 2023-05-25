@@ -4,7 +4,7 @@
     padding: 20px;
     background-color: var(--nav);
     width: 300px;
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     border-radius: 4px;
     color: var(--text);
 }
@@ -24,7 +24,7 @@
     width: 290px;
     height: 20px;
     padding: 5px;
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     border-radius: 4px;
     margin: 0 -1px;
     background-color: var(--bg);

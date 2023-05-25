@@ -3,7 +3,7 @@ h3 {
 }
 
 .repo-nav {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
 } 
 
 main {
@@ -13,7 +13,7 @@ main {
 }
 
 .repo {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
     padding: 10px;
 }
 
@@ -42,7 +42,7 @@ code {
 
 .repo-tree {
     width: 100%;
-    border: 1px solid gray;
+    border: 1px solid var(--border);
     border-radius: 4px;
     border-spacing: 0;
     table-layout: auto;
@@ -55,7 +55,7 @@ code {
 .repo-tree td, .repo-tree th {
     padding: 16px 10px;
     color: var(--text-secondary);
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border);
     font-size: 14px;
 }
 
@@ -168,7 +168,7 @@ code {
 
 .repo-tree-top .upload {
     background-color: var(--nav);
-    outline: 1px solid gray;
+    outline: 1px solid var(--border);
     outline-offset: -1px;
     transition: all 50ms ease-in-out;
 }
