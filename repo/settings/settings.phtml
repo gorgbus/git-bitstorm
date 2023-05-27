@@ -47,7 +47,7 @@ require("../repo_head.phtml");
                         <h3><?= $repo["username"] ?>/<?= $repo["name"] ?></h3>
                     </div>
 
-                    <div>
+                    <div class="confirmation">
                         <label for="repo-visibility">To confirm, type "<?= $repo["username"] . "/" . $repo["name"] ?>"</label>
                         <input data-confirm="<?= $repo["username"] ?>/<?= $repo["name"] ?>" data-modal="repo-visibility" autocomplete="off" required id="repo-visibility" name="repo-visibility">
 
@@ -86,7 +86,7 @@ require("../repo_head.phtml");
                         <h3><?= $repo["username"] ?>/<?= $repo["name"] ?></h3>
                     </div>
 
-                    <div>
+                    <div class="confirmation">
                         <label for="repo-deletion">To confirm, type "<?= $repo["username"] . "/" . $repo["name"] ?>"</label>
                         <input data-confirm="<?= $repo["username"] ?>/<?= $repo["name"] ?>" data-modal="delete-repo" autocomplete="off" required id="repo-deletion" name="repo-deletion">
 

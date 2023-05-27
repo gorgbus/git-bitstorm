@@ -2,32 +2,46 @@
 require("../head.phtml");
 ?>
 
-<?php if (isset($repos)) : ?>
-    <h3><?= sizeof($repos) ?> repository results</h3>
+<main>
+<?php if (!isset($repos)): ?>
+    <form class="big-search-bar">
+        <input placeholder="Search" type="text" name="q">
+        <button type="submit" hidden></button>
+    </form>
 <?php endif; ?>
 
-<?php if (isset($users)) : ?>
-    <h3><?= sizeof($users) ?> user results</h3>
-<?php endif; ?>
+<div class="repos">
+    <?php if (isset($repos) || isset($users)): ?>
+        <div class="repos-head">
+            <?php if (isset($repos)) : ?>
+                <h3><?= sizeof($repos) ?> repository results</h3>
+            <?php elseif (isset($users)) : ?>
+                <h3><?= sizeof($users) ?> user results</h3>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
 
-<ul class="repos">
-    <?php if (isset($repos)) foreach ($repos as $repo) : ?>
-        <li class="repo">
-            <a href="/repo?name=<?= $repo["name"] ?>"><?= $repo["username"] ?>/<?= $repo["name"] ?></a>
+    <ul>
+        <?php if (isset($repos)) foreach ($repos as $repo) : ?>
+            <li class="repo">
+                <a href="/repo?name=<?= $repo["name"] ?>"><?= $repo["username"] ?>/<?= $repo["name"] ?></a>
 
-            <!-- <p><?= $repo["desc"] ?></p> -->
-        </li>
-    <?php endforeach; ?>
+                <?php if ($repo["change"]): ?>
+                    <p>Updated <?= $repo["change"] ?></p>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
 
-    <?php if (isset($users)) foreach ($users as $user) : ?>
-        <li>
-            <a href="/user/?id=<?= $user["id"] ?>">
-                <?= $user["username"] ?>
-            </a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+        <?php if (isset($users)) foreach ($users as $user) : ?>
+            <li>
+                <a href="/user/?id=<?= $user["id"] ?>">
+                    <?= $user["username"] ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+</main>
 
 </body>
-
 </html>

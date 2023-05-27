@@ -43,7 +43,7 @@ code {
 .repo-tree {
     width: 100%;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     border-spacing: 0;
     table-layout: auto;
 }
@@ -163,7 +163,7 @@ code {
     font-size: 14px;
     padding: 10px;
     margin: 5px;
-    border-radius: 4px;
+    border-radius: var(--radius);
 }
 
 .repo-tree-top .upload {
@@ -231,6 +231,6 @@ code {
 }
 
 .repo-nav .nav-btns a:hover span {
-    border-radius: 4px;
+    border-radius: var(--radius);
     background-color: var(--btn-hover-secondary);
 }

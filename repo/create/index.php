@@ -6,8 +6,6 @@ if (!$logged_in) return require("../../404.phtml");
 
 $title = "New Repository";
 
-require("create.phtml");
-
 require("../../fns/repo.php");
 require("../../fns/user.php");
 
@@ -32,3 +30,5 @@ if (isset($_POST["name"]) && !empty($_POST["name"])) {
             break;
     }
 }
+
+require("create.phtml");

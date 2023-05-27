@@ -8,6 +8,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
     }
 
     header("Location: /search?q=$search");
+    exit;
 }
 ?>
 
@@ -40,7 +41,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
                 <li>
                     <form method="post" id="s-form">
                         <div class="s-wrap">
-                            <input autocomplete="off" type="text" name="search" id="search" placeholder="search">
+                            <input autocomplete="off" type="text" name="search" id="search" placeholder="Search">
 
                             <div hidden class="s-types">
                                 <div active=true class="s-type" id="t-all">

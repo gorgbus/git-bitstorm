@@ -44,8 +44,8 @@ function create_repo($db, $name, $private, $owner) {
 
 function get_repos($db, $user_id, $visitor_id) {
     $sql = "
-        select *
-        from repository
+        select r.*, u.username
+        from repository r inner join user u on r.owner = u.id
         where owner = $user_id
     " . ($visitor_id === $user_id ? "" : " and private = 0");
 

@@ -5,7 +5,7 @@
     background-color: var(--nav);
     width: 300px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     color: var(--text);
 }
 
@@ -25,7 +25,7 @@
     height: 20px;
     padding: 5px;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     margin: 0 -1px;
     background-color: var(--bg);
     color: var(--text);
@@ -40,7 +40,7 @@
     height: 30px;
     margin-top: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius);
     font-weight: 700;
     font-size: 14px;
     color: var(--text);

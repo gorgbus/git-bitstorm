@@ -49,7 +49,7 @@ function is_binary($file) {
 function delete_repo_files($dir) {
     $dir = REPO . $dir;
 
-    delete_files($dir);
+    if (file_exists($dir)) delete_files($dir);
 }
 
 function delete_files($dir) {

@@ -12,7 +12,7 @@ main {
     background-color: var(--bg-darker);
     color: var(--text);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     padding: 5px;
 }
 
@@ -32,14 +32,14 @@ main {
     background-color: var(--nav);
     color: var(--text);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     padding: 5px 10px;
 }
 
 .settings-danger {
     margin-top: 20px;
     border: 1px solid var(--border-red);
-    border-radius: 4px;
+    border-radius: var(--radius);
 }
 
 .settings-danger .setting-danger { 
@@ -64,7 +64,7 @@ main {
     color: var(--red);
     outline: none;
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     padding: 5px 10px;
     cursor: pointer;
     transition: all 50ms ease-in-out;
@@ -80,39 +80,104 @@ main {
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    padding: 10px;
-    border-radius: 4px;
+    border-radius: var(--radius);
     border: 1px solid var(--border);
     background-color: var(--nav);
     box-shadow: rgb(48, 54, 61) 0px 0px 0px 1px, rgba(1, 4, 9, 0.85) 0px 16px 32px 0px;
+}
+
+.modal form > * {
+    padding: 10px;
 }
 
 dialog::backdrop {
     background-color: rgba(110, 118, 129, 0.4);
 }
 
+.modal h3 {
+    margin: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal .confirmation label {
+    color: var(--text);
+    display: block;
+}
+
+.modal .confirmation input, .modal .confirmation button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal .confirmation input {
+    border: 1px solid var(--red);
+    border-radius: var(--radius);
+    color: var(--text);
+    background-color: var(--bg);
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.modal .confirmation input:focus {
+    outline: 2px solid var(--bg-hover);
+}
+
+.modal .confirmation button {
+    background-color: var(--btn-bg-secondary);
+    border: 1px solid var(--border-red);
+    border-radius: var(--radius);
+    color: var(--red);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.modal .confirmation button:hover {
+    background-color: var(--red);
+    color: var(--text);
+}
+
+.modal .confirmation button:disabled {
+    background-color: var(--bg);
+    opacity: .7;
+    cursor: default;
+    color: var(--red);
+}
+
 .close-btn {
     background-color: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
     transition: all 50ms ease-in-out;
+    cursor: pointer;
 }
 
 .close-btn:hover {
     background-color: var(--btn-hover-secondary);
 }
 
+.close-btn path {
+    fill: var(--text-secondary);
+}
+
+.close-btn:hover path {
+    fill: var(--text);
+}
+
 .modal-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
 }
 
-main {
+.user-settings-wrap {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }

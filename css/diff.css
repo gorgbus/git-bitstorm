@@ -62,7 +62,7 @@
 }
 .d2h-file-wrapper{
     border:1px solid var(--border);
-    border-radius: 4px;
+    border-radius: var(--radius);
     margin-bottom: 1em
 }
 .d2h-file-collapse{

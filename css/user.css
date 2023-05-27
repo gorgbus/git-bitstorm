@@ -1,0 +1,38 @@
+main {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.user-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user {
+    margin-top: 20px;
+    width: 300px;
+}
+
+.repos {
+    margin: 20px;
+}
+
+.profile-picture-wrap, .profile-picture-wrap img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.profile-picture-wrap {
+    border: 2px solid var(--border);
+}
+
+.user h2 {
+    color: var(--text);
+}
+
+.user h3 {
+    color: var(--text-secondary);
+    font-weight: 400;
+}

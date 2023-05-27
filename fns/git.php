@@ -236,7 +236,7 @@ function create_zip($username, $repo_name, $commit) {
 
     if (!file_exists($dir)) return 0; 
 
-    $out_dir = __REPO__ . "/../tmp/" . $username;
+    $out_dir = BASE . "/tmp/" . $username;
     $output = $out_dir . "/" . $repo_name;
 
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
@@ -255,7 +255,7 @@ function create_file($username, $repo_name, $file, $commit) {
 
     if (!file_exists($dir)) return 0; 
 
-    $out_dir = __REPO__ . "/../tmp/" . $username;
+    $out_dir = BASE . "/tmp/" . $username;
     $output = $out_dir . "/" . pathinfo($file, PATHINFO_FILENAME);
 
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
@@ -265,4 +265,25 @@ function create_file($username, $repo_name, $file, $commit) {
     exec("cd $dir && git cat-file -p $commit:$file > $output");
 
     return $output;
+}
+
+function get_latest_changes($repos) {
+    $dir = REPO;
+    $i = 0;
+
+    foreach ($repos as $repo) {
+        $change = [];
+
+        exec("cd $dir/{$repo["username"]}/{$repo["name"]} && git log -n 1 --format=" . '"%ar"' . " HEAD", $change);
+
+        $repo["change"] = "";
+
+        if (!empty($change)) $repo["change"] = $change[0];
+
+        $repos[$i] = $repo;
+        
+        $i++;
+    }
+
+    return $repos;
 }

@@ -19,6 +19,8 @@ $latest = true;
 
 $files = get_tree($title, $commit, $path);
 
+if (empty($files)) header("Location: /repo/upload?name={$repo["name"]}");
+
 $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 require("repo.phtml");

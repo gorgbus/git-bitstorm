@@ -1,15 +1,20 @@
 main {
     background-color: var(--bg);
-}
-
-.my-repos {
     max-width: 1100px;
-    padding: 0 20px;
     margin: auto;
-    margin-top: 20px;
+    padding: 0 20px;
 }
 
-.my-repos div {
+.repos {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 5px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.repos .repos-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,11 +22,11 @@ main {
     border-bottom: 1px solid var(--border);
 }
 
-.my-repos h3 {
+.repos h3 {
     color: white;
 }
 
-.my-repos ul {
+.repos ul {
     list-style: none;
 }
 
@@ -33,11 +38,21 @@ main {
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: 400;
+    font-size: 14px;
     display: inline-block;
 }
 
 .new:hover {
     background-color: var(--btn-bg-hover);
+}
+
+.new svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.new path {
+    fill: var(--text);
 }
 
 .repo {
@@ -56,13 +71,82 @@ main {
     text-decoration: underline;
 }
 
-.repo span {
+.repo .visibility {
     display: inline-block;
     border: 1px solid var(--border);
     border-radius: 20px;
-    color: var(--border);
+    color: var(--text-secondary);
     font-size: 10px;
     font-weight: 600;
     padding: 2px 4px;
     vertical-align: top;
+}
+
+.repo p {
+    margin-top: 5px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.fake-h3 {
+    display: inline-block;
+    height: 20px;
+    width: 200px;
+    background-color: var(--border);
+    border-radius: var(--radius);
+}
+
+.fake-repo-name {
+    display: inline-block;
+    height: 20px;
+    width: 150px;
+    background-color: var(--border);
+    border-radius: var(--radius);
+}
+
+.fake-repo-change {
+    display: block;
+    height: 12px;
+    width: 100px;
+    background-color: var(--border);
+    border-radius: calc(var(--radius) / 2);
+}
+
+.repo:nth-child(even) .fake-repo-name {
+    width: 250px;
+}
+
+.repo:nth-child(even) .fake-repo-change {
+    width: 175px;
+} 
+
+.fake {
+    opacity: .3;
+}
+
+.info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    text-align: center;
+    text-shadow: 0 0 10px var(--border);
+}
+
+.info h3 {
+    font-size: 28px;
+}
+
+.info span {
+    color: var(--text);
+    font-size: 20px;
+}
+
+.info a {
+    color: var(--bg-hover);
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
 }
