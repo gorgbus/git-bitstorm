@@ -1,6 +1,6 @@
 <main>
     <div class="repo-tree-top">
-        <?php if ($logged_in && $repo["owner"] == $_SESSION["user"] && $latest) : ?>
+        <?php if ($logged_in && $repo["username"] == $_SESSION["user"] && $latest) : ?>
             <a class="upload" href="/repo/upload/?name=<?= $repo["name"] ?>">
                 Upload files
             </a>

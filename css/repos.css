@@ -234,3 +234,117 @@ code {
     border-radius: var(--radius);
     background-color: var(--btn-hover-secondary);
 }
+
+.new-repo-wrap .repo-name {
+    color: var(--text);
+    text-decoration: none;
+    margin-top: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+.new-repo div {
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+
+.new-repo .new-repo-name label {
+    display: block;
+    color: var(--text);
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.new-repo .new-repo-name input {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 5px;
+    color: var(--text);
+}
+
+.new-repo .new-repo-name input:focus {
+    outline: 2px solid var(--bg-hover);
+}
+
+.new-repo .new-repo-vis label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.new-repo .new-repo-vis label:first-child {
+    margin-bottom: 10px;
+}
+
+.new-repo .new-repo-vis svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.new-repo .new-repo-vis path {
+    fill: var(--text);
+}
+
+.new-repo .new-repo-vis input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    margin: -1px;
+}
+
+.new-repo .new-repo-vis input:checked ~ .checkmark {
+    background-color: var(--bg-hover);
+    border: none;
+    margin: 0;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.new-repo .new-repo-vis input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.new-repo .new-repo-vis .checkmark:after {
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--bg);
+}
+
+.new-repo button {
+    float: right;
+    margin-top: 10px;
+    padding: 5px;
+    color: var(--text);
+    background-color: var(--btn-bg);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 50ms ease-in-out;
+}
+
+.new-repo button:hover {
+    background-color: var(--btn-bg-hover);
+}

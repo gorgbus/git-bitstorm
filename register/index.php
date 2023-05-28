@@ -3,6 +3,7 @@ require("../session.php");
 require("../db.php");
 
 require("../fns/user.php");
+require("../fns/files.php");
 
 $title = "Register";
 $css = ["login"];
@@ -24,6 +25,8 @@ if (isset($_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["pa
 
         if ($success_reg) {
             $success_log = login($db, $_POST["username"], $_POST["password"]);
+
+            gen_profile_picture($_POST["username"]); 
 
             if ($success_log) header("Location: /");
             else $status = "invalid username or password";

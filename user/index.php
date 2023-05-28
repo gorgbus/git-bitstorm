@@ -8,16 +8,18 @@ require("../fns/git.php");
 
 $title = "404";
 
-if (!isset($_GET["id"]) || empty($_GET["id"])) return require("../404.phtml");
+require("../user.php");
 
-$user = get_user($db, $_GET["id"]);
+if (!isset($_GET["name"]) || empty($_GET["name"])) return require("../404.phtml");
 
-if (!$user) return require("../404.phtml");
+$current_user = get_user($db, $_GET["name"]);
 
-$repos = get_repos($db, $_GET["id"], ($logged_in) ? $_SESSION["user"] : -1);
+if (!$current_user) return require("../404.phtml");
+
+$repos = get_repos($db, $current_user["id"], ($logged_in) ? $user["id"] : -1);
 $repos = get_latest_changes($repos);
 
-$title = $user["username"];
+$title = $current_user["username"];
 $css = ["home", "user"];
 
 require("user.phtml");

@@ -5,6 +5,7 @@ require("../../db.php");
 if (!$logged_in) return require("../../404.phtml");
 
 $title = "New Repository";
+$css = ["repos"];
 
 require("../../fns/repo.php");
 require("../../fns/user.php");
@@ -15,6 +16,9 @@ if (isset($_POST["name"]) && !empty($_POST["name"])) {
     $name = $_POST["name"];
     $private = $_POST["private"];
     $owner = $_SESSION["user"];
+
+    $name = preg_replace("/[[:blank:]]+/", "-", $name);
+    $name = preg_replace("/[^0-9a-zA-Z-]/", "", $name);
 
     $res = create_repo($db, $name, $private, $owner);
 

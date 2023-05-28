@@ -10,7 +10,7 @@ require("../repo.php");
 
 if (!$logged_in) return require("../../404.phtml");
 
-if ($user["id"] != $_SESSION["user"]) return require("../../404.phtml");
+if ($user["username"] != $_SESSION["user"]) return require("../../404.phtml");
 
 $css = ["repos", "settings"]; 
 

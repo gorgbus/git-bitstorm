@@ -14,7 +14,7 @@ $css = ["home"];
 $repos;
 
 if ($logged_in) {
-    $repos = get_repos($db, $_SESSION["user"], $_SESSION["user"]);
+    $repos = get_repos($db, $user["id"], $user["id"]);
 
     $repos = get_latest_changes($repos);
 }

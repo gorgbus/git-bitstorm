@@ -99,7 +99,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
                                 <div>Signed in as <strong><?= $user["username"] ?></strong></div>  
 
                                 <div>
-                                    <a href="/user?id=<?= $user["id"] ?>">Your profile</a>
+                                    <a href="/user?name=<?= $user["username"] ?>">Your profile</a>
                                     <a href="/">Your repositories</a>
                                 </div>
 

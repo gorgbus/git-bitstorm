@@ -3,7 +3,7 @@ function login($db, $username, $password) {
     $password = sha1($password);
 
     $sql = "
-        select id
+        select username 
         from user
         where username = '$username'
         and password = '$password'
@@ -16,7 +16,7 @@ function login($db, $username, $password) {
     $user = mysqli_fetch_assoc($res);
 
     if ($user) {
-        $_SESSION["user"] = $user["id"];
+        $_SESSION["user"] = $user["username"];
 
         return 1;
     }
@@ -58,11 +58,11 @@ function user_exists($db, $username) {
     return 0;
 }
 
-function get_user($db, $user_id) {
+function get_user($db, $username) {
     $sql = "
         select id, username, name
         from user
-        where id = $user_id
+        where username like '$username'
     ";
 
     $res = mysqli_query($db, $sql);

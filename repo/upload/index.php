@@ -13,7 +13,7 @@ require("../../user.php");
 
 $repo = get_repo($db, $_GET["name"]);
 
-if (!$repo || $repo["owner"] != $_SESSION["user"]) return require("../../404.phtml");
+if (!$repo || $repo["username"] != $_SESSION["user"]) return require("../../404.phtml");
 
 $title = "Upload files";
 $max_file_size = 1024 * 1024 * 10;
