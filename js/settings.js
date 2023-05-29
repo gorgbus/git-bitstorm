@@ -2,7 +2,7 @@ const modals = document.querySelectorAll(".modal, .dialog");
 const dialogs = document.querySelectorAll(".dialog");
 const open_btns = document.querySelectorAll(".open-modal-btn");
 const open_dialog_btns = document.querySelectorAll(".open-dialog-btn");
-const close_btns = document.querySelectorAll(".modal-head .close-btn");
+const close_btns = document.querySelectorAll(".modal .close-btn");
 const confirm_btns = document.querySelectorAll(".modal .confirm-btn");
 const inputs = document.querySelectorAll(".modal input");
 

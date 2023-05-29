@@ -1,5 +1,6 @@
 <?php
 require(__DIR__ . "/../fns/user.php");
+require(__DIR__ . "/../fns/issue.php");
 require(__DIR__ . "/../user.php");
 
 if (!isset($_GET["name"]) || empty($_GET["name"])) {
@@ -14,5 +15,8 @@ if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["u
     exit;
 } 
 
+$issue_count = count_issues($db, $repo["id"], "open");
+
+$current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 $title = $repo["username"] . "/" . $repo["name"];

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&display=swap');
+
 h3 {
     color: white;
 }
@@ -107,6 +109,7 @@ code {
 
 .repo-tree td:first-child {
     padding-right: 0;
+    padding-left: 16px;
     width: 16px;
 }
 
@@ -120,6 +123,102 @@ code {
 
 .repo-tree .commit-msg {
     max-width: 100%; 
+}
+
+.repo-tree .commit-msg a {
+    max-width: 300px;
+    vertical-align: bottom;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.repo-tree .file-name a {
+    max-width: 200px;
+    vertical-align: bottom;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.repo-tree .picture-head {
+    padding-right: 0;
+}
+
+.repo-tree .picture-wrap {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-color: var(--bg);
+    padding-right: 0;
+}
+
+.repo-tree .picture-wrap img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.repo-tree .commit-head-msg {
+    text-align: left;
+    color: var(--text);
+}
+
+.repo-tree .commit-head-msg .author-name {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.repo-tree .commit-head-msg .author-name:hover {
+    text-decoration: underline;
+} 
+
+.repo-tree .commit-head-msg .msg {
+    font-weight: 400;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
+    display: inline-block;
+    vertical-align: bottom;
+    color: var(--text);
+}
+
+.repo-tree .commit-head-msg .msg:hover {
+    color: var(--bg-hover);
+    text-decoration: underline;
+} 
+
+.commits-head .hash, .commits-head .date {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.commits-head .date {
+    margin-right: 10px;
+}
+
+.commits-head .hash {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.commits-head .date:hover {
+    text-decoration: underline;
+}
+
+.commits-head .hash:hover {
+    text-decoration: underline;
+}
+
+.repo-tree .name-head, .repo-tree .msg-head, .repo-tree .date-head {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.repo-tree .name-head, .repo-tree .msg-head {
+    text-align: left;
 }
 
 .repo-info {
@@ -156,7 +255,7 @@ code {
     padding-bottom: 5px;
 }
 
-.repo-tree-top a {
+.repo-tree-top a, .repo-tree-top span {
     display: inline-block;
     color: var(--text);
     text-decoration: none;
@@ -171,10 +270,25 @@ code {
     outline: 1px solid var(--border);
     outline-offset: -1px;
     transition: all 50ms ease-in-out;
+    margin-right: 0;
 }
 
 .repo-tree-top .upload:hover {
     background-color: var(--btn-hover-secondary);
+}
+
+.repo-tree-top .delete {
+    background-color: var(--nav);
+    outline: 1px solid var(--red);
+    outline-offset: -1px;
+    transition: all 50ms ease-in-out;
+    margin-right: 0;
+    color: var(--red);
+}
+
+.repo-tree-top .delete:hover {
+    background-color: var(--red);
+    color: var(--text);
 }
 
 .repo-tree-top .download {
@@ -224,13 +338,13 @@ code {
     fill: var(--text-secondary);
 }
 
-.repo-nav .nav-btns span {
+.repo-nav .nav-btns .nav-btn-name {
     display: inline-block;
     padding: 5px 10px;
     margin: 5px 0;
 }
 
-.repo-nav .nav-btns a:hover span {
+.repo-nav .nav-btns a:hover .nav-btn-name {
     border-radius: var(--radius);
     background-color: var(--btn-hover-secondary);
 }
@@ -347,4 +461,52 @@ code {
 
 .new-repo button:hover {
     background-color: var(--btn-bg-hover);
+}
+
+.modal.remove-confirm .close-btn {
+    margin-left: 5px;
+}
+
+.modal.remove-confirm *:focus {
+    outline: none;
+}
+
+.modal.remove-confirm .modal-head {
+    padding: 10px;
+}
+
+.modal.remove-confirm .modal-head span {
+    padding: 0;
+}
+
+.modal.remove-confirm .delete-dir {
+    display: block;
+    border: 1px solid var(--red);
+    border-radius: var(--radius);
+    color: var(--red);
+    text-align: center;
+    background-color: var(--nav);
+    margin: 10px;
+    padding: 5px;
+    text-decoration: none;
+    transition: all 50ms ease-in-out;
+}
+
+.modal.remove-confirm .delete-dir:hover {
+    background-color: var(--red);
+    color: var(--text);
+}
+
+.modal.remove-confirm .cancel {
+    display: block;
+    text-align: center;
+    border: 1px solid var(--border);
+    margin: 10px;
+    color: var(--text);
+}
+
+.issue-count {
+    background-color: var(--nav);
+    padding: 2px 5px;
+    border-radius: var(--radius);
 }

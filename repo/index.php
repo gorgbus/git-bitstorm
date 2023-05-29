@@ -16,11 +16,10 @@ $commit_count = get_commit_count($title, $commit);
 
 $commit_query = "";
 $latest = true;
+$commit_info = get_commit_info($title, $commit);
 
 $files = get_tree($title, $commit, $path);
 
 if (empty($files)) header("Location: /repo/upload?name={$repo["name"]}");
-
-$current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 require("repo.phtml");

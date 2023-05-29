@@ -5,7 +5,8 @@ require("../head.phtml");
 <main>
 <?php if (!isset($repos)): ?>
     <form class="big-search-bar">
-        <input placeholder="Search" type="text" name="q">
+        <h1>BitStorm</h1>
+        <input autocomplete="off" placeholder="Search" type="text" name="q">
         <button type="submit" hidden></button>
     </form>
 <?php endif; ?>

@@ -1,8 +1,55 @@
+main {
+    max-width: 1100px;
+}
+
+.commit-info-wrap {
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+.commit {
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.commit-info {
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--nav);
+}
+
+.commit-info h3 {
+    padding: 10px;
+}
+
+.commit-date {
+    font-size: 14px;
+    padding: 10px;
+    border-top: 1px solid var(--border);
+    background-color: var(--bg);
+    border-bottom-right-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    display: flex;
+    align-items: center;
+}
+
+.commit-date span {
+    margin-left: 10px;
+}
+
+.commit-date img {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
 .d2h-wrapper{
     text-align:left;
     color: #fff;
     max-width: 1100px;
     margin: auto;
+    padding: 20px;
 }
 .d2h-file-header{
     border-bottom:1px solid var(--border);
@@ -77,10 +124,10 @@
     display:none;
     font-size:12px;
     justify-content:flex-end;
-    padding:4px 8px
+    padding:4px 8px;
 }
 .d2h-file-collapse-input{
-    margin:0 4px 0 0
+    margin:0 4px 0 0;
 }
 .d2h-diff-table{
     border-collapse:collapse;
@@ -228,7 +275,8 @@
     color:rgba(0,0,0,.3)
 }
 .d2h-file-list-wrapper{
-    margin-bottom:10px
+    margin-bottom:10px;
+    display: none;
 }
 .d2h-file-list-wrapper a{
     color:#3572b0;
@@ -286,7 +334,7 @@
     color:#3572b0
 }
 .d2h-tag{
-    background-color:#fff;
+    border-radius: 3px;
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;

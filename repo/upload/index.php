@@ -8,6 +8,7 @@ require("../../fns/git.php");
 require("../../fns/files.php");
 require("../../fns/repo.php");
 require("../../fns/user.php");
+require("../../fns/issue.php");
 
 require("../../user.php");
 
@@ -23,6 +24,7 @@ $dir = $repo["username"] . "/" . $repo["name"];
 $css = ["repos", "upload"];
 $js = ["upload"];
 
+$issue_count = count_issues($db, $repo["id"], "open");
 
 if (isset($_FILES["files"]) && isset($_POST["message"]) && !empty($_POST["message"])) {
     save_files($dir, $_FILES["files"], $_POST["message"], $repo["username"]);

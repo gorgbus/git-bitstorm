@@ -49,10 +49,14 @@ function is_binary($file) {
 function delete_repo_files($dir) {
     $dir = REPO . $dir;
 
+    echo $dir;
+
     if (file_exists($dir)) delete_files($dir);
 }
 
 function delete_files($dir) {
+    if (is_file($dir)) return unlink($dir);
+
     $files = scandir($dir);
     $files = array_filter($files, function($f) {
         return !in_array($f, [".", ".."]);

@@ -5,9 +5,10 @@ require("../../db.php");
 require("../../fns/git.php");
 require("../../fns/repo.php");
 
-if (!isset($_GET["commit"]) || empty($_GET["commit"])) return require("../../404.phtml");
-
 require("../repo.php");
+require("../commit.php");
+
+$commit = get_commit_info($title, $_GET["commit"]);
 
 $css = ["repos", "diff", "highlight.js"];
 

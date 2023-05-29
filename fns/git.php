@@ -13,14 +13,26 @@ function get_latest_commit($dir) {
     return $commit[0];
 }
 
-function get_first_commit($dir) {
-    $first_commit = [];
+function get_commit_info($dir, $commit) {
+    $dir = REPO . $dir;
 
-    exec("cd $dir && git log --reverse --format=" . '"%H"' . " --max-parents=0", $first_commit);
+    if (!file_exists($dir)) return 0;
 
-    if (count($first_commit) < 1) return 0;
+    $commit_info = [];
+    $empty_tree = "4b825dc642cb6eb9a060e54bf8d69288fbee4904";
 
-    return $first_commit[0];
+    exec("cd $dir && git log -n 1 --date=format:" . '"%b %d, %Y"' . " --format=" . '"%an%n%s%n%h%n%ar%n%ad%n%H"' . " $empty_tree..$commit", $commit_info);
+
+    if (count($commit_info) < 1) return 0;
+
+    return [
+        "author" => $commit_info[0],
+        "msg" => $commit_info[1],
+        "short_hash" => $commit_info[2],
+        "full_hash" => $commit_info[5],
+        "date" => $commit_info[3],
+        "date_alt" => $commit_info[4],
+    ];
 }
 
 function get_commits($dir, $commit, $page, $page_size) {
@@ -113,6 +125,10 @@ function get_commit_count($dir, $commit) {
     if (count($count) < 1) return 0;
 
     return (int) $count[0];
+}
+
+function get_repo_dir($dir) {
+    return REPO . $dir;
 }
 
 function commit($dir, $msg, $username) {
@@ -239,6 +255,8 @@ function create_zip($username, $repo_name, $commit) {
     $out_dir = BASE . "/tmp/" . $username;
     $output = $out_dir . "/" . $repo_name;
 
+    if (!file_exists($out_dir)) mkdir($out_dir, 0777, true);
+
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
 
     $output = $output . ".zip";
@@ -257,6 +275,8 @@ function create_file($username, $repo_name, $file, $commit) {
 
     $out_dir = BASE . "/tmp/" . $username;
     $output = $out_dir . "/" . pathinfo($file, PATHINFO_FILENAME);
+
+    if (!file_exists($out_dir)) mkdir($out_dir, 0777, true);
 
     if ($commit != get_latest_commit($username . "/" . $repo_name)) $output = $output . "-" . $commit;
 
@@ -286,4 +306,28 @@ function get_latest_changes($repos) {
     }
 
     return $repos;
+}
+
+function check_commit($dir, $commit) {
+    $dir = REPO . $dir;
+
+    $valid = [];
+
+    exec("cd $dir && git rev-parse --verify $commit", $valid);
+
+    if (empty($valid)) return 0;
+
+    return 1;
+}
+
+function check_path($dir, $commit, $path) {
+    $dir = REPO . $dir;
+
+    $valid = [];
+
+    exec("cd $dir && git show $commit:$path", $valid);
+
+    if (empty($valid)) return 0;
+
+    return 1;
 }

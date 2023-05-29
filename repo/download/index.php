@@ -10,7 +10,7 @@ if (!isset($_GET["commit"]) || empty($_GET["commit"])) return require("../../404
 
 $repo = get_repo($db, $_GET["name"]);
 
-if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["owner"] != $_SESSION["user"])) return require("../../404.phtml");
+if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["username"] != $_SESSION["user"])) return require("../../404.phtml");
 
 $file = "";
 

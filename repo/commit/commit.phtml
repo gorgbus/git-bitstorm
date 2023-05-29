@@ -2,6 +2,22 @@
 require("../../head.phtml");
 require("../repo_head.phtml");
 ?>
+<main>
+    <div class="commit-info-wrap"> 
+        <h2 class="commit">Commit</h2>
+
+        <div class="commit-info">
+            <h3><?= $commit["msg"] ?></h3>
+
+            <div class="commit-date">
+                <a href="/user?name=<?= $commit["author"] ?>">
+                    <img src="/images?user=<?= $commit["author"] ?>&v=small" alt="author-picture">
+                </a>
+
+                <span><strong><?= $commit["author"] ?></strong> commited on <?= $commit["date_alt"] ?></span>
+            </div>
+        </div>
+    </div>
 
     <div id="diff"></div>
 </main>

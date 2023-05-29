@@ -16,6 +16,8 @@ $page_size = 35;
 $commits_url = "name={$repo["name"]}";
 
 if (isset($_GET["commit"]) && !empty($_GET["commit"])) {
+    require("../commit.php");
+
     $commit = $_GET["commit"];
 
     $commits_url = $commits_url . "&commit=$commit";

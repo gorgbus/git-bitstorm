@@ -8,7 +8,7 @@ require("fns/git.php");
 
 require("user.php");
 
-$title = "Home";
+$title = "BitStorm";
 $css = ["home"];
 
 $repos;
