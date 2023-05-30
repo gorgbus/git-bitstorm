@@ -1,0 +1,22 @@
+<?php
+require("../../../head.phtml");
+require("../../repo_head.phtml");
+?>
+    
+<main class="new-issue-form">
+    <form method="post">
+        <a href="/user?name=<?= $user["username"] ?>">
+            <img src="/images?user=<?= $user["username"] ?>&v=small" alt="user-picture">
+        </a>
+
+        <input placeholder="Title" type="text" name="name" required>
+
+        <textarea placeholder="Leave a comment" rows="8" name="content" required></textarea>
+
+        <div class="button-wrap">
+            <button type="submit">Submit new issue</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

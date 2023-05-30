@@ -22,7 +22,7 @@
     </div>
 
     <div class="nav-btns">
-        <a <?php if ($current_url != "/repo/settings/" && $current_url != "/repo/issues/") echo "class='active'" ?> href="/repo?name=<?= $repo["name"] ?>">
+        <a <?php if (!in_array($current_url, ["/repo/settings/", "/repo/issues/", "/repo/issue/", "/repo/issue/create/"])) echo "class='active'" ?> href="/repo?name=<?= $repo["name"] ?>">
             <span class="nav-btn-name">
                 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
                     <path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"></path>
@@ -32,7 +32,7 @@
             </span>
         </a>
 
-        <a <?php if ($current_url == "/repo/issues/") echo "class='active'" ?> href="/repo/issues?name=<?= $repo["name"] ?>">
+        <a <?php if (in_array($current_url, ["/repo/issues/", "/repo/issue/", "/repo/issue/create/"])) echo "class='active'" ?> href="/repo/issues?name=<?= $repo["name"] ?>">
             <span class="nav-btn-name">
                 <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline">
                     <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path>

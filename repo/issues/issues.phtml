@@ -4,21 +4,70 @@ require("../repo_head.phtml");
 ?>
     
 <main>
-    <form method="get">
-        <input type="text" name="q">
-        <button type="submit" hidden></button>
-    </form>
+    <div class="issue-top">
+        <form class="issue-search" method="get">
+            <input type="text" hidden name="name" value="<?= $repo["name"] ?>">
+            <input type="text" hidden name="status" value="<?= (isset($_GET["status"])) ? $_GET["status"] : "" ?>">
+            <input placeholder="Search all issues" type="text" name="q" value="<?= (isset($_GET["q"])) ? $_GET["q"] : "" ?>">
+            <button type="submit" hidden></button>
+        </form>
 
-    <table>
-        <tr>
-            <th></th>
+        <?php if ($logged_in): ?>
+            <a href="/repo/issue/create?name=<?= $repo["name"] ?>" class="new-issue">New issue</a>
+        <?php endif; ?>
+    </div>
+
+    <table class="issues">
+        <tr class="issues-head">
+            <th>
+                <a class="opened-issues <?= ($status == "open") ? "active" : "" ?>" href="/repo/issues?name=<?= $repo["name"] ?>&status=open<?= (isset($_GET["q"])) ? "&q=" . $_GET["q"] : "" ?>">
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline">
+                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path>
+                    </svg>
+
+                    <?= $issue_count ?> Open
+                </a>
+                <a class="closed-issues <?= ($status == "closed") ? "active" : "" ?>" href="/repo/issues?name=<?= $repo["name"] ?>&status=closed<?= (isset($_GET["q"])) ? "&q=" . $_GET["q"] : "" ?>">
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                        <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+                    </svg>
+
+                    <?= $closed_issues ?> Closed
+                </a>
+            </th>
             <th></th>
         </tr>
 
         <?php foreach ($issues as $issue): ?>
             <tr>
-                <td><?= $issue["name"] ?></td>
-                <td><?= $issue["comment_count"] ?></td>
+                <td class="issue">
+                    <?php if ($issue["status"] == "open"): ?>
+                        <svg class="open" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline">
+                            <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path>
+                        </svg>
+                    <?php else: ?>
+                        <svg class="closed" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"></path><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"></path>
+                        </svg>
+                    <?php endif; ?>
+
+                    <a href="/repo/issue?name=<?= $repo["name"] ?>&id=<?= $issue["id"] ?>"><?= $issue["name"] ?></a>
+
+                    <?php if ($issue["status"] == "open"): ?>
+                        <span class="issue-info">#<?= $issue["id"] ?> opened on <?= date("M d, Y", strtotime($issue["created_at"])) ?> by <a class="author" href="/user?name=<?= $issue["username"] ?>"><?= $issue["username"] ?></a></span>
+                    <?php else: ?>
+                        <span class="issue-info">#<?= $issue["id"] ?> by <a class="author" href="/user?name=<?= $issue["username"] ?>"><?= $issue["username"] ?></a> was closed on <?= date("M d, Y", strtotime($issue["closed_at"])) ?></span>
+                    <?php endif; ?>
+                </td>
+                <td class="comments">
+                    <a href="/repo/issue?name=<?= $repo["name"] ?>&id=<?= $issue["id"] ?>">
+                        <svg class="comment-icon" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                            <path d="M1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 13.25 12H9.06l-2.573 2.573A1.458 1.458 0 0 1 4 13.543V12H2.75A1.75 1.75 0 0 1 1 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h4.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+                        </svg>
+
+                        <?= $issue["comment_count"] ?>
+                    </a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>

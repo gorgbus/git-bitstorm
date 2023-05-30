@@ -1,0 +1,90 @@
+<?php
+require("../../head.phtml");
+require("../repo_head.phtml");
+?>
+    
+<main class="current-issue new-issue-form">
+    <h1><?= $issue["name"] ?> <span class="id">#<?= $issue["id"] ?></span></h1>
+
+    <div class="issue-info">
+        <?php if ($issue["status"] == "open"): ?>
+            <span class="open">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline">
+                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"></path>
+                </svg>
+
+                Open
+            </span>
+        <?php else: ?>
+            <span class="closed">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                    <path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"></path><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"></path>
+                </svg>
+
+                Closed
+            </span>
+        <?php endif; ?>
+
+        <span class="info"><a href="/user?name=<?= $issue["username"] ?>"><?= $issue["username"] ?></a> opened this issue on <?= date("M d, Y", strtotime($issue["created_at"])) ?> · <?= $issue["comment_count"] ?> comment<?= ($issue["comment_count"] != 1) ? "s" : "" ?></span>
+    </div>
+
+    <div class="comment">
+        <a href="/user?name=<?= $issue["username"] ?>">
+            <img src="/images?user=<?= $issue["username"] ?>&v=small" alt="author-picture">
+        </a>
+
+        <div class="content">
+            <div class="info"><a href="/user?name=<?= $issue["username"] ?>"><?= $issue["username"] ?></a> commented on <?= date("M d, Y", strtotime($issue["created_at"])) ?></div>
+
+            <p><?= $issue["content"] ?></p>
+        </div>
+    </div>
+
+    <?php foreach ($comments as $comment): ?>
+        <div class="comment">
+            <a href="/user?name=<?= $comment["username"] ?>">
+                <img src="/images?user=<?= $comment["username"] ?>&v=small" alt="author-picture">
+            </a>
+
+            <div class="content">
+                <div class="info"><a href="/user?name=<?= $comment["username"] ?>"><?= $comment["username"] ?></a> commented on <?= date("M d, Y", strtotime($issue["created_at"])) ?></div>
+
+                <p><?= $comment["content"] ?></p>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+    <?php if ($logged_in): ?>
+        <form method="post">
+            <a href="/user?name=<?= $user["username"] ?>">
+                <img src="/images?user=<?= $user["username"] ?>&v=small" alt="user-picture">
+            </a>
+
+            <textarea placeholder="Leave a comment" rows="8" name="content" required></textarea>
+
+            <div class="button-wrap">
+                <button type="submit">Comment</button>
+
+                <?php if ($logged_in && $repo["username"] == $_SESSION["user"]): ?>
+                    <a class="change-status" href="./close.php?name=<?= $repo["name"] ?>&id=<?= $issue["id"] ?>">
+                        <?php if ($issue["status"] == "closed"): ?>
+                            <svg class="reopen" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                                <path d="M5.029 2.217a6.5 6.5 0 0 1 9.437 5.11.75.75 0 1 0 1.492-.154 8 8 0 0 0-14.315-4.03L.427 1.927A.25.25 0 0 0 0 2.104V5.75A.25.25 0 0 0 .25 6h3.646a.25.25 0 0 0 .177-.427L2.715 4.215a6.491 6.491 0 0 1 2.314-1.998ZM1.262 8.169a.75.75 0 0 0-1.22.658 8.001 8.001 0 0 0 14.315 4.03l1.216 1.216a.25.25 0 0 0 .427-.177V10.25a.25.25 0 0 0-.25-.25h-3.646a.25.25 0 0 0-.177.427l1.358 1.358a6.501 6.501 0 0 1-11.751-3.11.75.75 0 0 0-.272-.506Z"></path><path d="M9.06 9.06a1.5 1.5 0 1 1-2.12-2.12 1.5 1.5 0 0 1 2.12 2.12Z"></path>
+                            </svg>
+
+                            Reopen
+                        <?php else: ?>
+                            <svg class="close" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true">
+                                <path d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"></path><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"></path>
+                            </svg>
+
+                            Close
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </form>
+    <?php endif; ?>
+</main>
+</body>
+</html>

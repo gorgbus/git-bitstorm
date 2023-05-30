@@ -10,6 +10,14 @@ require("../repo.php");
 
 $css = ["repos", "issue"];
 
-$issues = get_issues($db, $repo["id"], "open");
+$status = "open";
+$name = "%";
+
+if (isset($_GET["status"])) $status = $_GET["status"];
+
+if (isset($_GET["q"])) $name = "%{$_GET["q"]}%";
+
+$issues = get_issues($db, $repo["id"], $status, $name);
+$closed_issues = count_issues($db, $repo["id"], "closed");
 
 require("issues.phtml");

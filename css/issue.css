@@ -1,3 +1,396 @@
 main {
     max-width: 1100px;
+    margin: 20px auto;
+}
+
+.issue-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.issue-search {
+    width: 100%;
+}
+
+.issue-search input {
+    background-color: var(--bg-darker);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    transition: all 50ms ease-in-out;
+    color: var(--text);
+}
+
+.issue-search input::placeholder {
+    color: var(--text-secondary);
+}
+
+.issue-search input:focus {
+    outline: 2px solid var(--bg-hover);
+}
+
+.issue-top .new-issue {
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    background-color: var(--btn-bg);
+    padding: 5px;
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 14px;
+    transition: all 50ms ease-in-out;
+    margin-left: 20px;
+}
+
+.issue-top .new-issue:hover {
+    background-color: var(--btn-bg-hover);
+}
+
+.issues {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    width: 100%;
+    margin-top: 20px;
+    border-spacing: 0;
+}
+
+.issues th {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.issues td {
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.issues .issue {
+    color: var(--text);
+}
+
+.issues tr:last-child td {
+    border: none;
+}
+
+.issues .issue svg {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.issues .open path {
+    fill: var(--btn-bg);
+}
+
+.issues .closed path {
+    fill: var(--bg-hover);
+}
+
+.issues .comment-icon {
+    vertical-align: middle;
+}
+
+.issues .comment-icon path {
+    fill: var(--text-secondary);
+}
+
+.issues .comments {
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.issues .comments a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.issues .comments a:hover {
+    color: var(--bg-hover);
+}
+
+.issues .comments a:hover path {
+    fill: var(--bg-hover);
+}
+
+.issues .issue-info {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-left: 18px;
+    margin-top: 5px;
+}
+
+.issues-head th {
+    background-color: var(--nav);
+    border-bottom: 1px solid var(--border);
+}
+
+.issues .opened-issues, .issues .closed-issues {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.issues .opened-issues:hover, .issues .closed-issues:hover {
+    color: var(--text);
+}
+
+.issues .opened-issues svg, .issues .closed-issues svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.issues .opened-issues:hover path, .issues .closed-issues:hover path {
+    fill: var(--text);
+}
+
+.issues .opened-issues path, .issues .closed-issues path {
+    fill: var(--text-secondary);
+}
+
+.issues .active {
+    color: var(--text);
+}
+
+.issues .active path {
+    fill: var(--text);
+}
+
+.issues .issue a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.issues .issue a:hover {
+    color: var(--bg-hover);
+}
+
+.issues .issue .author {
+    color: var(--text-secondary);
+}
+
+.new-issue-form {
+    max-width: 900px;
+}
+
+.new-issue-form form {
+    width: 100%;
+}
+
+.new-issue-form input, .new-issue-form textarea {
+    background-color: var(--bg-darker);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    transition: all 50ms ease-in-out;
+    color: var(--text);
+}
+
+.new-issue-form input::placeholder, .new-issue-form textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+.new-issue-form input:focus, .new-issue-form textarea:focus {
+    outline: 2px solid var(--bg-hover);
+}
+
+.new-issue-form textarea {
+    resize: vertical;
+    margin: 10px 0;
+}
+
+.new-issue-form button {
+    float: right;
+    background-color: var(--btn-bg);
+    border: none;
+    border-radius: var(--radius);
+    padding: 5px;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 50ms ease-in-out;
+}
+
+.new-issue-form button:hover {
+    background-color: var(--btn-bg-hover);
+}
+
+.current-issue {
+    max-width: 900px;
+}
+
+.current-issue h1 {
+    color: var(--text);
+}
+
+.current-issue h1 .id {
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.current-issue .issue-info {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+
+.current-issue .open, .current-issue .closed {
+    display: inline-block;
+    padding: 5px 10px;
+    color: var(--text);
+    border-radius: 16px;
+    font-size: 14px;
+}
+
+.current-issue .open {
+    background-color: var(--btn-bg);
+}
+
+.current-issue .closed {
+    background-color: var(--bg-hover);
+}
+
+.current-issue .open svg, .current-issue .closed svg {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.current-issue .open path, .current-issue .closed path {
+    fill: var(--text);
+}
+
+.current-issue .issue-info a {
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.current-issue .issue-info a:hover {
+    color: var(--bg-hover);
+    text-decoration: underline;
+}
+
+.current-issue .info {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.current-issue .comment {
+    display: grid;
+    grid-template-columns: 40px auto;
+    column-gap: 10px;
+    margin-top: 20px;
+}
+
+.current-issue img {
+    border-radius: 50%;
+}
+
+.current-issue .comment .content {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.current-issue .content .info {
+    background-color: var(--nav);
+    border-bottom: 1px solid var(--border);
+    border-top-right-radius: var(--radius);
+    border-top-left-radius: var(--radius);
+    padding: 10px;
+    font-size: 14px;
+}
+
+.current-issue .content .info a {
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.current-issue .content .info a:hover {
+    color: var(--bg-hover);
+    text-decoration: underline;
+}
+
+.current-issue .content p {
+    padding: 10px;
+    color: var(--text);
+}
+
+.current-issue form {
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.new-issue-form img {
+    border-radius: 50%;
+    margin-bottom: -20px;
+}
+
+.new-issue-form form {
+    display: grid;
+    display: grid;
+    grid-template-columns: 40px auto;
+    grid-template-rows: 0 auto auto auto;
+    column-gap: 10px;
+}
+
+.new-issue-form input {
+    grid-row: 2;
+    grid-column: 2;
+    margin-bottom: 10px;
+}
+
+.new-issue-form textarea {
+    margin: 0;
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.new-issue-form form .button-wrap {
+    grid-column: 2;
+    padding-top: 10px;
+    grid-row: 4;
+}
+
+.current-issue .change-status {
+    float: right;
+    display: block;
+    padding: 4px;
+    margin-right: 10px;
+    color: var(--text);
+    font-size: 14px;
+    text-decoration: none;
+    outline: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--nav);
+    transition: all 50ms ease-in-out;
+}
+
+.current-issue .change-status:hover {
+    outline-color: var(--text);
+    background-color: var(--border);
+}
+
+.current-issue .change-status svg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.current-issue .change-status .reopen path {
+    fill: var(--btn-bg);
+}
+
+.current-issue .change-status .close path {
+    fill: var(--bg-hover);
 }
