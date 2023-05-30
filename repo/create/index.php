@@ -15,7 +15,7 @@ require("../../user.php");
 if (isset($_POST["name"]) && !empty($_POST["name"])) {
     $name = $_POST["name"];
     $private = $_POST["private"];
-    $owner = $_SESSION["user"];
+    $owner = $user["id"];
 
     $name = preg_replace("/[[:blank:]]+/", "-", $name);
     $name = preg_replace("/[^0-9a-zA-Z-]/", "", $name);

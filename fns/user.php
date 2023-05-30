@@ -28,8 +28,8 @@ function register($db, $username, $password) {
     $password = sha1($password);
 
     $sql = "
-        insert into user (username, password)
-        values ('$username', '$password')
+        insert into user (username, name, password)
+        values ('$username', '', '$password')
     ";
 
     $res = mysqli_query($db, $sql);
