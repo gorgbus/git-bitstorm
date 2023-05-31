@@ -20,7 +20,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 if (isset($_POST["repo-rename"])) {
     if ($_POST["repo-rename"] != $repo["name"]) {
-        switch (rename_repo($db, $repo["name"], $_POST["repo-rename"])) {
+        switch (rename_repo($repo["name"], $_POST["repo-rename"])) {
             case 1: {
                 rename_repo_dir($repo["username"], $repo["name"], $_POST["repo-rename"]);
 
@@ -47,13 +47,13 @@ if (isset($_POST["repo-rename"])) {
 if (isset($_POST["repo-visibility"])) {
     $new_vis = ($repo["private"]) ? 0 : 1;
 
-    change_visibility($db, $repo["name"], $new_vis);
+    change_visibility($repo["name"], $new_vis);
 
     header("Location: /repo?name={$repo["name"]}");
 }
 
 if (isset($_POST["repo-deletion"])) {
-    if (delete_repo($db, $repo["name"])) {
+    if (delete_repo($repo["name"])) {
         delete_repo_files($title);
 
         header("Location: /");

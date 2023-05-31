@@ -1,171 +1,205 @@
 <?php
+function repo_exists($name) {
+    $db = db();
 
-function repo_exists($db, $name) {
     $sql = "
         select *
         from repository
-        where name = '$name'
+        where name = ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0;
-    }
+        $query->execute([$name]);
 
-    if (mysqli_fetch_assoc($res)) {
-        return 1;
+        if ($query->fetch(PDO::FETCH_ASSOC)) return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
 
     return 0;
 }
 
-function create_repo($db, $name, $private, $owner) {
-    if (repo_exists($db, $name)) {
+function create_repo($name, $private, $owner) {
+    if (repo_exists($name)) {
         return -1;
     }
+
+    $db = db();
 
     $sql = "
         insert into repository
         (name, private, owner)
-        values ('$name', $private, $owner);
+        values (?, ?, ?);
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0;
+        $query->execute([$name, $private, $owner]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    return 1;
+    return 0;
 }
 
-function get_repos($db, $user_id, $visitor_id) {
+function get_repos($user_id, $visitor_id) {
+    $db = db();
+
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
-        where owner = $user_id
+        where owner = ?
     " . ($visitor_id === $user_id ? "" : " and private = 0");
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return [];
+        $query->execute([$user_id]);
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    $repos = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-    return $repos;
+    return [];
 }
 
-function get_repo($db, $name) {
+function get_repo($name) {
+    $db = db();
+
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
-        where r.name = '$name'
+        where r.name = ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0;
+        $query->execute([$name]);
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    $repo = mysqli_fetch_assoc($res);
-
-    return $repo;
+    return 0; 
 }
 
-function search_repos($db, $name, $visitor_id) {
+function search_repos($name, $visitor_id) {
+    $db = db();
+
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
-        where r.name like '%$name%' and (r.private = 0 or r.owner = $visitor_id)
+        where r.name like ? and (r.private = 0 or r.owner = ?)
     ";
 
-    $res = mysqli_query($db, $sql);
+    $name = "%$name%";
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return [];
+    try {
+        $query = $db->prepare($sql);
+
+        $query->execute([$name, $visitor_id]);
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    $repos = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-    return $repos;
+    return [];
 }
 
-function search_my_repos($db, $name, $user_id) {
+function search_my_repos($name, $user_id) {
+    $db = db();
+
     $sql = "
         select r.*, u.username
         from repository r inner join user u on r.owner = u.id
-        where r.name like '%$name%' and r.owner = $user_id
+        where r.name like ? and r.owner = ? 
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return [];
+        $query->execute([$name, $user_id]);
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    $repos = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-    return $repos;
+    return [];
 }
 
-function change_visibility($db, $name, $new_vis) {
+function change_visibility($name, $new_vis) {
+    $db = db();
+
     $sql = "
-        update repository set private = $new_vis
-        where name like '$name'
+        update repository set private = ? 
+        where name like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0; 
+        $query->execute([$new_vis, $name]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    return 1;
+    return 0;
 }
 
-function delete_repo($db, $name) {
+function delete_repo($name) {
+    $db = db();
+
     $sql = "
         delete from repository
-        where name like '$name'
+        where name like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0;
+        $query->execute([$name]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    return 1;
+    return 0;
 }
 
-function rename_repo($db, $name, $new_name) {
-    if (repo_exists($db, $new_name)) {
+function rename_repo($name, $new_name) {
+    if (repo_exists($new_name)) {
         return -1;
     }
+
+    $db = db();
     
     $sql = "
-        update repository set name = '$new_name'
-        where name like '$name'
+        update repository set name = ?
+        where name like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return 0;
+        $query->execute([$new_name, $name]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    return 1;
+    return 0;
 }

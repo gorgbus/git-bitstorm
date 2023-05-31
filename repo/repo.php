@@ -8,14 +8,14 @@ if (!isset($_GET["name"]) || empty($_GET["name"])) {
     exit;
 } 
 
-$repo = get_repo($db, $_GET["name"]);
+$repo = get_repo($_GET["name"]);
 
 if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["username"] != $_SESSION["user"])) {
     require(__DIR__ . "/../404.phtml");
     exit;
 } 
 
-$issue_count = count_issues($db, $repo["id"], "open");
+$issue_count = count_issues($repo["id"], "open");
 
 $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 

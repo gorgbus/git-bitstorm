@@ -1,5 +1,21 @@
 <?php
+function db() {
+    static $pdo;
 
-$db = mysqli_connect("localhost", "root", "", "zwa-proj");
+    $server_name = "localhost";
+    $db_name = "zwa-proj";
+    $username = "root";
+    $password = "";
 
-mysqli_set_charset($db, "UTF8");
+    if ($pdo == null) {
+        try {
+            $pdo = new PDO("mysql:host=$server_name;dbname=$db_name", $username, $password);
+
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    return $pdo;
+}

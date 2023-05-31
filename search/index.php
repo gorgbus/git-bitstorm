@@ -16,14 +16,14 @@ if (isset($_GET["q"]) && !empty($_GET["q"])) {
         if (isset($_GET["t"]) && $_GET["t"] === "users") {
             $users = [];
         } else {
-            $repos = search_my_repos($db, substr($_GET["q"], 5), $user["id"]);
+            $repos = search_my_repos(substr($_GET["q"], 5), $user["id"]);
             $repos = get_latest_changes($repos);
         }
     } else {
         if (isset($_GET["t"]) && $_GET["t"] === "users") {
-            $users = search_users($db, $_GET["q"]);
+            $users = search_users($_GET["q"]);
         } else {
-            $repos = search_repos($db, $_GET["q"], ($logged_in) ? $user["id"] : -1);
+            $repos = search_repos($_GET["q"], ($logged_in) ? $user["id"] : -1);
             $repos = get_latest_changes($repos);
         }
     }

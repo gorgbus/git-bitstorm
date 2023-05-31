@@ -16,7 +16,7 @@ if (isset($_POST["name"])) {
 
     $content = nl2br(htmlentities($content, ENT_QUOTES, 'UTF-8'));
 
-    if (create_new_issue($db, $repo["id"], $user["id"], $name, $content)) header("Location: /repo/issues?name={$repo["name"]}");
+    if (create_new_issue($repo["id"], $user["id"], $name, $content)) header("Location: /repo/issues?name={$repo["name"]}");
     exit;
 }
 

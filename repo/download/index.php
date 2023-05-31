@@ -8,7 +8,7 @@ require("../../fns/repo.php");
 if (!isset($_GET["name"]) || empty($_GET["name"])) return require("../../404.phtml");
 if (!isset($_GET["commit"]) || empty($_GET["commit"])) return require("../../404.phtml");
 
-$repo = get_repo($db, $_GET["name"]);
+$repo = get_repo($_GET["name"]);
 
 if (!$repo || ($repo["private"] && !$logged_in) || ($repo["private"] && $repo["username"] != $_SESSION["user"])) return require("../../404.phtml");
 

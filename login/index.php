@@ -13,7 +13,7 @@ if ($logged_in) {
 }
 
 if (isset($_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["username"])) {
-    $success = login($db, $_POST["username"], $_POST["password"]);
+    $success = login($_POST["username"], $_POST["password"]);
 
     if ($success) header("Location: /");
     else $status = "invalid username or password";

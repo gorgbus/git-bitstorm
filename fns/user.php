@@ -1,112 +1,148 @@
 <?php
-function login($db, $username, $password) {
+function login($username, $password) {
+    $db = db();
+    
     $password = sha1($password);
 
     $sql = "
         select username 
         from user
-        where username = '$username'
-        and password = '$password'
+        where username = ?
+        and password = ? 
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) echo mysqli_error($db);
+        $query->execute([$username, $password]);
 
-    $user = mysqli_fetch_assoc($res);
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
 
-    if ($user) {
-        $_SESSION["user"] = $user["username"];
-
-        return 1;
+        return 0;
     }
 
-    return 0;
+    $_SESSION["user"] = $user["username"];
+
+    return 1;
 }
 
-function register($db, $username, $password) {
+function register($username, $password) {
+    $db = db();
+
     $password = sha1($password);
 
     $sql = "
         insert into user (username, name, password)
-        values ('$username', '', '$password')
+        values (?, ?, ?)
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if ($res) return 1;
-    else echo mysqli_error($db);
+        $query->execute([$username, "", $password]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
+    }
 
     return 0;
 }
 
-function user_exists($db, $username) {
+function user_exists($username) {
+    $db = db();
+
     $sql = "
         select id
         from user
-        where username = '$username'
+        where username = ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) echo mysqli_error($db);
-    
-    $user = mysqli_fetch_assoc($res);
+        $query->execute([$username]);
 
-    if ($user) return 1;
-    
+        if ($query->fetch(PDO::FETCH_ASSOC)) return 1;
+    } catch (PDOException $e) {
+        echo $e;
+    }
+
     return 0;
 }
 
-function get_user($db, $username) {
+function get_user($username) {
+    $db = db();
+
     $sql = "
         select id, username, name
         from user
-        where username like '$username'
+        where username like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) echo mysqli_error($db);
+        $query->execute([$username]);
 
-    $user = mysqli_fetch_assoc($res);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
+    }
 
-    return $user;
+    return 0;
 }
 
-function search_users($db, $username) {
+function search_users($username) {
+    $db = db();    
+    
     $sql = "
         select id, username
         from user
-        where username like '%$username%'
+        where username like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    $username = "%$username%";
 
-    if (!$res) {
-        echo mysqli_error($db);
-        return [];
+    try {
+        $query = $db->prepare($sql);
+
+        $query->execute([$username]);
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo $e;
     }
 
-    $users = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-    return $users;
+    return [];
 }
 
-function change_user_name($db, $username, $new_name) {
+function change_user_name($username, $new_name) {
+    $db = db();
+
     $sql = "
-        update user set name = '$new_name'
-        where username like '$username'
+        update user set name = ?
+        where username like ?
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
+        $query->execute([$new_name, $username]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
+
+    return 0;
 }
 
-function change_user_password($db, $username, $new_password) {
+function change_user_password($username, $new_password) {
+    $db = db();
+
     $new_password = sha1($new_password);
 
     $sql = "
@@ -114,9 +150,15 @@ function change_user_password($db, $username, $new_password) {
         where username like '$username'
     ";
 
-    $res = mysqli_query($db, $sql);
+    try {
+        $query = $db->prepare($sql);
 
-    if (!$res) {
-        echo mysqli_error($db);
+        $query->execute([$new_password, $username]);
+
+        return 1;
+    } catch (PDOException $e) {
+        echo $e;
     }
+
+    return 0;
 }

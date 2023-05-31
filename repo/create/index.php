@@ -20,7 +20,7 @@ if (isset($_POST["name"]) && !empty($_POST["name"])) {
     $name = preg_replace("/[[:blank:]]+/", "-", $name);
     $name = preg_replace("/[^0-9a-zA-Z-]/", "", $name);
 
-    $res = create_repo($db, $name, $private, $owner);
+    $res = create_repo($name, $private, $owner);
 
     switch ($res) {
         case -1:

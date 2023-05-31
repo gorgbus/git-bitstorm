@@ -15,16 +15,16 @@ if ($logged_in) {
 $status = "";
 
 if (isset($_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password2"]) && !empty($_POST["username"])) {
-    if (user_exists($db, $_POST["username"])) {
+    if (user_exists($_POST["username"])) {
         $status = "username {$_POST["username"]} is unavailable";
     } else if ($_POST["password"] != $_POST["password2"]) {
         $status = "passwords do not match";
     } else {
 
-        $success_reg = register($db, $_POST["username"], $_POST["password"]);
+        $success_reg = register($_POST["username"], $_POST["password"]);
 
         if ($success_reg) {
-            $success_log = login($db, $_POST["username"], $_POST["password"]);
+            $success_log = login($_POST["username"], $_POST["password"]);
 
             gen_profile_picture($_POST["username"]); 
 

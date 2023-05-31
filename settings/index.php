@@ -29,16 +29,16 @@ if (isset($_FILES["picture"]) && in_array($_FILES["picture"]["type"], $allowed_t
 }
 
 if (isset($_POST["name"]) && !empty($_POST["name"])) {
-    change_user_name($db, $user["username"], $_POST["name"]);; 
+    change_user_name($user["username"], $_POST["name"]);; 
 
     header("Location: /settings");
     exit;
 }
 
 if (isset($_POST["old_password"])) {
-    if (login($db, $user["username"], $_POST["old_password"])) {
+    if (login($user["username"], $_POST["old_password"])) {
         if ($_POST["new_password"] == $_POST["confirm_password"]) {
-            change_user_password($db, $user["username"], $_POST["new_password"]); 
+            change_user_password($user["username"], $_POST["new_password"]); 
 
             header("Location: /settings");
             exit;
