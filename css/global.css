@@ -241,3 +241,15 @@ body {
     border-radius: var(--radius);
     padding: 3px;
 }
+
+.not-found {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    translate: -50% -30%;
+    text-align: center;
+}
+
+.not-found h1 {
+    color: var(--text);
+}

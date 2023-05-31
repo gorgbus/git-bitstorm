@@ -151,7 +151,7 @@ function get_tree($dir, $commit, $path) {
 
     if (!file_exists($dir)) return [];
 
-    exec("cd $dir && git ls-tree $commit:$path", $tree);
+    exec("cd $dir && git ls-tree $commit:" . '"'. $path . '"', $tree);
 
     return re_array_tree($dir, $tree, $commit);
 }
@@ -213,7 +213,7 @@ function get_file($dir, $commit, $path) {
 
     if (!file_exists($dir)) return [];
 
-    exec("cd $dir && git cat-file -p $commit:$path", $file);
+    exec("cd $dir && git cat-file -p $commit:" . '"' . $path . '"', $file);
 
     return $file;
 }
@@ -282,7 +282,7 @@ function create_file($username, $repo_name, $file, $commit) {
 
     $output = $output . "." . pathinfo($file, PATHINFO_EXTENSION);
 
-    exec("cd $dir && git cat-file -p $commit:$file > $output");
+    exec("cd $dir && git cat-file -p $commit:" . '"' . $file . '"' . " > $output");
 
     return $output;
 }
@@ -325,7 +325,7 @@ function check_path($dir, $commit, $path) {
 
     $valid = [];
 
-    exec("cd $dir && git show $commit:$path", $valid);
+    exec("cd $dir && git show $commit:" . '"' . $path . '"', $valid);
 
     if (empty($valid)) return 0;
 
