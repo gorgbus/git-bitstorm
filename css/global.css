@@ -197,7 +197,7 @@ body {
     font-size: 10pt;
 }
 
-.s-type[active=true] {
+.s-type.active {
     background-color: var(--bg-hover);
     color: white;
 }

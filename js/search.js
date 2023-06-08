@@ -40,13 +40,13 @@ document.addEventListener("click", (e) => {
 document.querySelectorAll(".s-type").forEach((s_type) => {
     s_type.addEventListener("mouseover", (e) => {
         if (e.target.closest("#t-all")) {
-            t_all.setAttribute("active", true);
-            t_user.setAttribute("active", false);
+            t_all.classList.add("active");
+            t_user.classList.remove("active");
 
             r_all.checked = true;
         } else if (e.target.closest("#t-user")) {
-            t_user.setAttribute("active", true);
-            t_all.setAttribute("active", false);
+            t_user.classList.add("active");
+            t_all.classList.remove("active");
 
             r_user.checked = true;
         }
